@@ -12,6 +12,7 @@ export default function SendTokenModal(props) {
 
   const getOffer = async () => {
     setIsLoading(true);
+    // Esse id setado hardcoded pode dar problema em algum momento
     const response = await fetchOffer(617533, jwtToken);
     if (response.status && response.status === 401) {
       console.log(response.status);
