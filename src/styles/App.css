@@ -134,6 +134,8 @@ header {
   background-color: #1a1a1a;
   padding: 8px 16px;
   box-sizing: border-box;
+  position: fixed;
+  width: 100%;
 }
 
 .logos-container {
@@ -159,6 +161,7 @@ header {
 .buttons {
   display: flex;
   gap: 16px;
+  min-width: 200px;
 }
 
 .buttons > select {
@@ -187,11 +190,12 @@ header {
 }
 
 .main-container {
+  box-sizing: border-box;
   padding-top: 16px;
   display: flex;
-  justify-content: center;
-  box-sizing: border-box;
   height: 100%;
+  width: 100%;
+  margin-top: 64px;
 }
 
 .main-box {

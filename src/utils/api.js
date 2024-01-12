@@ -1,11 +1,11 @@
 const url = 'https://api-qa-spaces-target.onrender.com';
+// const url = 'http://localhost:3001';
 
-export async function fetchSpaceContent(space, token) {
+export async function fetchSpaceContent(space) {
   try {
     const config = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token }),
     };
 
     const endpoint = `${url}/space-content/simple/${space}`;
@@ -19,12 +19,11 @@ export async function fetchSpaceContent(space, token) {
   }
 }
 
-export async function fetchOffer(offerId, token) {
+export async function fetchOffer(offerId) {
   try {
     const config = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token }),
     };
   
     const endpoint = `${url}/offers/${offerId}`;
