@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import SendTokenModal from './SendTokenModal';
 import logoLCG from '../assets/lcgbr-white-logo.webp';
-import logoPan from '../assets/pan-white-logo.png';
+// import logoPan from '../assets/pan-white-logo.png';
 import '../styles/App.css';
 
 export default function Header(props) {
@@ -18,12 +18,14 @@ export default function Header(props) {
   return (
     <>
       <header>
-        <div className="logos-container" >
+        {/* <div className="logos-container" > */}
+        <a href="https://www.limaconsulting.com/pt-br/" target='_blank' rel="noreferrer">
           <img className="logos" src={logoLCG} />
-          <img className="logos" src={logoPan} />
-        </div>
-        <div>
-          <h1 className="app-title">Quality Assurance<br/><span className="app-subtitle">Spaces do Adobe Target</span></h1>
+        </a>
+        {/* <img className="logos" src={logoPan} /> */}
+        {/* </div> */}
+        <div className="app-titles-container">
+          <h1 className="app-title">LCGBR Toolkit<br/><span className="app-subtitle">QA - Spaces do Adobe Target</span></h1>
         </div>
         <div className='buttons'>
           <select value={selectedSpace} onChange={(e) => setSelectedSpace(e.target.value)}>

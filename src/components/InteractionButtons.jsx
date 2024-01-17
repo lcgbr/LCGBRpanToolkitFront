@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import JSONicon from '../assets/json-icon.png';
-import LINKicon from '../assets/deep-link-icon.png';
+import deepLinkIcon from '../assets/deep-link-icon.png';
+import externalLinkIcon from '../assets/external-link-icon.png';
 import '../styles/App.css';
 
 
@@ -10,6 +11,11 @@ export default function ViewJsonButton(props) {
 
   const [isVisible, setIsVisible] = useState(false);
 
+  const isExternalOrDeepLink = (link) => {
+    const regex = /^(http|https):\/\//;
+    return regex.test(link);
+  };
+
   return (
     <>
       <div className='icons-container'>
@@ -17,11 +23,23 @@ export default function ViewJsonButton(props) {
           <img src={JSONicon} alt="Visualizar JSON" />
         </button>
         {/* eslint-disable-next-line react/jsx-no-target-blank */}
-        <a href={details.content.payload.acao || details.content.payload.deeplink} target="_blank">
+        {
+          isExternalOrDeepLink(details.content.payload.acao || details.content.payload.deeplink)
+            ? (<a href={details.content.payload.acao || details.content.payload.deeplink} target="_blank" rel="noreferrer">
+              <button className="icons"  type="button">
+                <img src={externalLinkIcon} alt="Acessar External Link" />
+              </button>
+            </a>) : (
+              <button className="icons deep-link"  type="button" disabled>
+                <img src={deepLinkIcon} alt="Deep Link" />
+              </button>
+            )
+        }
+        {/* <a href={details.content.payload.acao || details.content.payload.deeplink} target="_blank" rel="noreferrer">
           <button className="icons"  type="button">
             <img src={LINKicon} alt="Acessar Deep Link" />
           </button>
-        </a>
+        </a> */}
       </div>
       {isVisible && (
         <main className="overlay">
