@@ -19,20 +19,20 @@ export async function fetchSpaceContent(space) {
   }
 }
 
-export async function fetchOffer(offerId) {
-  try {
-    const config = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    };
+// export async function fetchOffer(offerId) {
+//   try {
+//     const config = {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//     };
   
-    const endpoint = `${url}/offers/${offerId}`;
-    const response = await fetch(endpoint, config);
-    const data = await response.json();
+//     const endpoint = `${url}/offers/${offerId}`;
+//     const response = await fetch(endpoint, config);
+//     const data = await response.json();
 
-    return data;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
+//     return data;
+//   } catch (error) {
+//     console.error(error);
+//     return [];
+//   }
+// }

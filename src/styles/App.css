@@ -25,9 +25,18 @@
   max-height: 100px;
 }
 
+.activity-title {
+  line-height: 8px;
+  margin-bottom: 20px;
+}
+
 .activity {
   display: flex;
   gap: 64px;
+}
+
+.activity-title > strong {
+  color: #06B2FC;
 }
 
 main div section {
@@ -51,6 +60,7 @@ div > section > h3 {
   display:flex;
   align-items: center;
   justify-content: center;
+  z-index: 998;
 }
 
 .modal {
@@ -67,6 +77,8 @@ div > section > h3 {
   line-break: normal;
   overflow: hidden;
   max-width: 90%;
+  z-index: 999;
+  cursor: text;
 }
 
 button.close {
@@ -136,16 +148,22 @@ header {
   box-sizing: border-box;
   position: fixed;
   width: 100%;
+  z-index: 997;
 }
 
-.logos-container {
+/* .logos-container {
   display: flex;
   gap: 32px;
   width: 337px;
-}
+} */
 
 .logos {
-  height: 28px;
+  /* height: 28px; */
+  width: 192px;
+}
+
+.app-titles-container {
+  width: 304px;
 }
 
 .app-title {
@@ -161,7 +179,7 @@ header {
 .buttons {
   display: flex;
   gap: 16px;
-  min-width: 200px;
+  /* min-width: 192px; */
 }
 
 .buttons > select {
@@ -174,6 +192,7 @@ header {
   background-color: #242424;
   color: rgba(255, 255, 255, 0.87);
   cursor: pointer;
+  width: 192px;
 }
 
 .buttons > select:hover {
@@ -197,6 +216,11 @@ header {
   width: 100%;
   margin-top: 64px;
   padding-left: 64px;
+  padding-right: 64px;
+}
+
+.main-container.justify-center {
+  justify-content: center;
 }
 
 .main-box {
@@ -227,6 +251,17 @@ header {
 
 .icons:hover {
   background-color: #06B2FC;
+}
+
+.icons.deep-link {
+  opacity: 0.5;
+  cursor: default;
+  transition: none;
+}
+
+.icons.deep-link:hover {
+  background-color: #fff;
+  border-style: none;
 }
 
 .icons > img {
