@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import OfferCard from './OfferCard';
-import InteractionButtons from './InteractionButtons';
-import Loading from './Loading';
-import '../styles/App.css';
+import OfferCard from '../OfferCard';
+import InteractionButtons from '../InteractionButtons';
+import Loading from '../Loading';
+
+import '../../styles/App.css';
 
 export default function Main(props) {
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import JSONicon from '../assets/json-icon.png';
-import deepLinkIcon from '../assets/deep-link-icon.png';
-import externalLinkIcon from '../assets/external-link-icon.png';
-import '../styles/App.css';
+import JSONicon from '../../assets/json-icon.png';
+import deepLinkIcon from '../../assets/deep-link-icon.png';
+import externalLinkIcon from '../../assets/external-link-icon.png';
+import '../../styles/App.css';
 
 
 export default function ViewJsonButton(props) {
