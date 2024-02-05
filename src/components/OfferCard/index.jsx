@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/App.css';
+import '../../styles/App.css';
 
 export default function OfferCard(props) {
   const { payload } = props.offer.details.content;

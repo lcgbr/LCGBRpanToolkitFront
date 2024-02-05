@@ -1,7 +1,7 @@
 // import React, { useState } from 'react';
-// import { fetchOffer } from '../utils/api';
+// import { fetchOffer } from '../../utils/api';
 // import PropTypes from 'prop-types';
-// import '../styles/App.css';
+// import '../../styles/App.css';
 
 // export default function SendTokenModal(props) {
 //   const { setIsVisible, getSpaceContent } = props;

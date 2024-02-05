@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import SendTokenModal from './SendTokenModal';
-import logoLCG from '../assets/lcgbr-white-logo.webp';
+import logoLCG from '../../assets/lcgbr-white-logo.webp';
+import '../../styles/App.css';
+
+// import SendTokenModal from '../SendTokenModal';
 // import logoPan from '../assets/pan-white-logo.png';
-import '../styles/App.css';
 
 export default function Header(props) {
   const {
