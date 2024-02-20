@@ -6,7 +6,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import './styles/App.css';
 
 function App() {
-  const [selectedSpace, setSelectedSpace] = useState('dashResumo');
+  const [selectedSpace, setSelectedSpace] = useState('dashResumo1');
   const [errorMessage, setErrorMessage] = useState('');
   const [spaceData, setSpaceData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,8 +16,8 @@ function App() {
     setIsLoading(true);
 
     // const existingToken = localStorage.getItem('token');
-
-    const response = await fetchSpaceContent(selectedSpace);
+    const selectedSpaceClean = selectedSpace.replace(/\s/g, '').toLowerCase();
+    const response = await fetchSpaceContent(selectedSpaceClean);
 
     if (response.status) {
       setErrorMessage(response.message);

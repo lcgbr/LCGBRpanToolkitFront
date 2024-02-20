@@ -30,9 +30,25 @@ export default function Header(props) {
         </div>
         <div className='buttons'>
           <select value={selectedSpace} onChange={(e) => setSelectedSpace(e.target.value)}>
-            <option value="dashResumo">Dash Resumo</option>
-            <option value="homeResumo">Home Resumo</option>
+            <option value="dashResumo1">Dash Resumo 1</option>
+            <option value="dashResumo2">Dash Resumo 2</option>
+            <option value="dashResumo3">Dash Resumo 3</option>
             <option value="telaCentralAvisos">Central de Avisos</option>
+            <option value="homeResumo1">Home Resumo 1</option>
+            <option value="homeResumo2">Home Resumo 2</option>
+            <option value="homeResumo3">Home Resumo 3</option>
+            <option value="DashCartão">Dash Cartão</option>
+            <option value="DashConta">Dash Conta</option>
+            {/* <option value="Modal Toast - Home Cartao">Toast - Home Cartão</option>
+            <option value="Modal Toast - Home Conta">Toast - Home Conta</option> */}
+            {/* <option value="Modal Toast - Home Credito">Toast - Home Credito</option>
+            <option value="">Web - Desktop1</option>
+            <option value="">Web - Desktop2</option>
+            <option value="">Web - Desktop3</option>
+            <option value="">Web - Mobile1</option>
+            <option value="">Web - Mobile2</option>
+            <option value="">Web - Mobile3</option> */}
+
           </select>
           {/* <button 
             className={errorMessage === 'Parece que o token fornecido é inválido ou expirou.' && 'required-token'}

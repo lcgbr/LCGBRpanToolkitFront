@@ -1,23 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../../styles/App.css';
+// import '../../styles/App.css';
+import { CardContainer, CardContent } from './style';
 
 export default function OfferCard(props) {
   const { payload } = props.offer.details.content;
 
+  const title = payload.titulo || payload.title;
+  const subtitle = payload.subtitulo || payload.description;
+  const cardButton = payload.botao || payload.button;
+  const hasAllContent = title && subtitle && cardButton;
+
   return (
-    <div className="card-box">
+    <CardContainer>
       {payload.imagemURL
         ? (
           <img className="imagem" src={payload.imagemURL} alt="Descrição da imagem" />
         ) : (
-          <div className="box">
-            <p>{payload.titulo}</p>
-            <p>{payload.subtitulo}</p>
-            <p>{payload.botao}</p>
-          </div>
+          <CardContent>
+            {title && <p className={hasAllContent ? 'strong-wrap' : 'soft-wrap'}>{title}</p>}
+            {subtitle && <p className={hasAllContent ? 'strong-wrap' : 'soft-wrap'}>{subtitle}</p>}
+            {cardButton && <p>{cardButton}</p>}
+          </CardContent>
         )}
-    </div>
+    </CardContainer>
   );
 }
 

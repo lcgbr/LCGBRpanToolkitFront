@@ -4,27 +4,6 @@
   min-width: 100vw;
 }
 
-.card-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.box {
-  box-sizing: border-box;
-  background-color: #646cffaa;
-  border-radius: 8px;
-  height: 100px;
-  width: 265px;
-  margin-bottom: 8px;
-  font-size: 12px;
-  padding: 8px;
-}
-
-.imagem {
-  max-height: 100px;
-}
-
 .activity-title {
   line-height: 8px;
   margin-bottom: 20px;
@@ -33,6 +12,12 @@
 .activity {
   display: flex;
   gap: 64px;
+}
+
+.activity-title > h3 {
+  white-space: nowrap;
+  /* overflow: hidden; */
+  text-overflow: ellipsis;
 }
 
 .activity-title > strong {
