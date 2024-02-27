@@ -2,8 +2,23 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  background-color: ${({space}) => space === 'telaCentralAvisos' ? '#1a1a1a' : 'inherit'};
+  border-radius: 8px;
+
+  & span {
+    background-color: #1a1a1a;
+    border-radius: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
 
   & img {
     max-height: 100px;

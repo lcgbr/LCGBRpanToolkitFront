@@ -52,10 +52,11 @@ div > section > h3 {
   position: relative;
   background: #fff;
   border-radius: 8px;
-  padding: 32px;
+  padding: 64px 32px 32px 32px;
   color: #1a1a1a;
   text-align: left;
   font-weight: 600;
+  
 
   display:flex;
   flex-direction: column;
@@ -87,6 +88,8 @@ pre.pre {
   font-size: 10px;
   font-weight: 400;
   line-break: normal;
+  /* white-space: pre-wrap;
+  word-wrap: break-word; */
 }
 
 .token-error {
@@ -220,7 +223,6 @@ header {
   gap: 8px;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 20px;
 }
 
 .icons {
@@ -238,13 +240,13 @@ header {
   background-color: #06B2FC;
 }
 
-.icons.deep-link {
+.icons.disabled-link {
   opacity: 0.5;
   cursor: default;
   transition: none;
 }
 
-.icons.deep-link:hover {
+.icons.disabled-link:hover {
   background-color: #fff;
   border-style: none;
 }
