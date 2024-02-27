@@ -1,52 +1,62 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import JSONicon from '../../assets/json-icon.png';
+// import audienceIcon from '../../assets/audience-icon.png';
 import deepLinkIcon from '../../assets/deep-link-icon.png';
 import externalLinkIcon from '../../assets/external-link-icon.png';
 import '../../styles/App.css';
 
 
 export default function ViewJsonButton(props) {
-  const {details} = props.offer;
+  const {details, experienceName } = props.offer;
+  // const {audienceIds} = props.offer;
 
   const [isVisible, setIsVisible] = useState(false);
+  const [modalContent, setModalContent] = useState({...details, experienceName});
+
+  const deeplink = details.content.payload.acao || details.content.payload.deeplink || details.content.payload.linkExterno;
+
+  // const mensagem = 'Não é possível redirecionar. Deeplinks são destinados a abrir aplicativos em dispositivos móveis e não são navegáveis em um web browser padrão';
 
   const isExternalOrDeepLink = (link) => {
     const regex = /^(http|https):\/\//;
     return regex.test(link);
   };
 
+  const handleModalContent = (content) => {
+    setIsVisible(true);
+    setModalContent(content);
+  };
+
   return (
     <>
       <div className='icons-container'>
-        <button className="icons" type="button" onClick={() => setIsVisible(true)}>
+        <button className="icons" type="button" onClick={() => handleModalContent({...details, experienceName})}>
           <img src={JSONicon} alt="Visualizar JSON" />
         </button>
+        {/* <button className="icons" type="button" onClick={() => handleModalContent({experienceName, audienceIds})}>
+          <img src={audienceIcon} alt="Visualizar ID da audiência" />
+        </button> */}
         {/* eslint-disable-next-line react/jsx-no-target-blank */}
         {
-          isExternalOrDeepLink(details.content.payload.acao || details.content.payload.deeplink)
-            ? (<a href={details.content.payload.acao || details.content.payload.deeplink} target="_blank" rel="noreferrer">
-              <button className="icons"  type="button">
+          isExternalOrDeepLink(deeplink)
+            ? (<a href={deeplink} target="_blank" rel="noreferrer">
+              <button className={`icons ${!deeplink && 'disabled-link'}`} type="button" disabled={!deeplink}>
                 <img src={externalLinkIcon} alt="Acessar External Link" />
               </button>
             </a>) : (
-              <button className="icons deep-link"  type="button" disabled>
+              <button className="icons disabled-link" type="button" disabled>
                 <img src={deepLinkIcon} alt="Deep Link" />
               </button>
             )
         }
-        {/* <a href={details.content.payload.acao || details.content.payload.deeplink} target="_blank" rel="noreferrer">
-          <button className="icons"  type="button">
-            <img src={LINKicon} alt="Acessar Deep Link" />
-          </button>
-        </a> */}
       </div>
       {isVisible && (
         <main className="overlay">
           <div className="modal">
             <button className="close" type="button" onClick={() => setIsVisible(false)}>X</button>
             <pre>
-              {JSON.stringify(details, null, 2)}
+              {JSON.stringify(modalContent, null, 2)}
             </pre>
           </div>
         </main>

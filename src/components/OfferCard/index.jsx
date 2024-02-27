@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import '../../styles/App.css';
 import { CardContainer, CardContent } from './style';
 
 export default function OfferCard(props) {
+  const { position } = props.offer;
   const { payload } = props.offer.details.content;
 
   const title = payload.titulo || payload.title;
@@ -12,7 +12,8 @@ export default function OfferCard(props) {
   const hasAllContent = title && subtitle && cardButton;
 
   return (
-    <CardContainer>
+    <CardContainer space={payload.espaco}>
+      <span>{position}</span>
       {payload.imagemURL
         ? (
           <img className="imagem" src={payload.imagemURL} alt="Descrição da imagem" />

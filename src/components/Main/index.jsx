@@ -42,9 +42,6 @@ export default function Main(props) {
               {activity.options.map((offer, idx) => 
                 <div className="main-box" key={idx}>
                   <OfferCard offer={offer} />
-                  {/* <pre className='pre'>
-                      {JSON.stringify(offer.details, null, 2)}
-                    </pre> */}
                   <InteractionButtons offer={offer} />
                 </div>
               )}
