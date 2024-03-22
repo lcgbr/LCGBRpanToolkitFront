@@ -39,9 +39,9 @@ export default function Header(props) {
             <option value="homeResumo3">Home Resumo 3</option>
             <option value="DashCartão">Dash Cartão</option>
             <option value="DashConta">Dash Conta</option>
-            {/* <option value="DashCredito">Dash Credito</option>
+            <option value="DashCredito">Dash Crédito</option>
             <option value="Modal Toast - Home Cartao">Toast - Home Cartão</option>
-            <option value="Modal Toast - Home Conta">Toast - Home Conta</option> */}
+            <option value="Modal Toast - Home Conta">Toast - Home Conta</option>
             {/* <option value="Modal Toast - Home Credito">Toast - Home Credito</option>
             <option value="">Web - Desktop1</option>
             <option value="">Web - Desktop2</option>
