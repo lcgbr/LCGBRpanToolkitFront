@@ -8,11 +8,11 @@ import '../../styles/App.css';
 
 
 export default function ViewJsonButton(props) {
-  const {details, experienceName } = props.offer;
+  const {details, audienceIds, experienceName } = props.offer;
   // const {audienceIds} = props.offer;
 
   const [isVisible, setIsVisible] = useState(false);
-  const [modalContent, setModalContent] = useState({...details, experienceName});
+  const [modalContent, setModalContent] = useState({...details, audienceIds, experienceName});
 
   const deeplink = details.content.payload.acao || details.content.payload.deeplink || details.content.payload.linkExterno;
 
@@ -31,7 +31,7 @@ export default function ViewJsonButton(props) {
   return (
     <>
       <div className='icons-container'>
-        <button className="icons" type="button" onClick={() => handleModalContent({...details, experienceName})}>
+        <button className="icons" type="button" onClick={() => handleModalContent({...details, audienceIds, experienceName})}>
           <img src={JSONicon} alt="Visualizar JSON" />
         </button>
         {/* <button className="icons" type="button" onClick={() => handleModalContent({experienceName, audienceIds})}>
