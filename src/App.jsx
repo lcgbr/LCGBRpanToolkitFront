@@ -27,6 +27,14 @@ function App() {
       setSpaceData(response);
     }
     setIsLoading(false);
+    // window.dataLayer = window.dataLayer || [];
+    // window.dataLayer.push({
+    //   'event': 'space_view',
+    //   'pageInfo': {
+    //     'space': selectedSpaceClean,
+    //     'activities': response.length
+    //   }
+    // });
   };
 
   useEffect(() => {

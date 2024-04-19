@@ -1,10 +1,24 @@
 import styled from 'styled-components';
 
+export const CardTitles = styled.div`
+  font-size: 12px;
+  text-align: left;
+  width: 262px;
+  align-self: flex-end;
+
+  p {
+    margin: 0;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden; // Removendo barra de rolagem
+    text-overflow: ellipsis; // Adicionando "..." ao final
+  }
+`;
+
 export const CardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({space}) => space === 'telaCentralAvisos' ? '#1a1a1a' : 'inherit'};
   border-radius: 8px;
 
   & span {
@@ -19,10 +33,18 @@ export const CardContainer = styled.div`
     align-items: center;
     user-select: none;
   }
+`;
+
+export const ImageContainer = styled.div`
+  line-height: 0;
+  /* background-color: ${({space}) => space === 'telaCentralAvisos' ? 'rgba(255, 255, 255, 0.95)' : 'inherit'}; */
+  background-color: ${({space}) => space === 'telaCentralAvisos' ? '#1a1a1a' : 'inherit'};
+  min-width: 265px;
+  border-radius: 8px;
 
   & img {
-    max-height: 100px;
-  }
+      max-height: 100px;
+    }
 `;
 
 export const CardContent = styled.div`
