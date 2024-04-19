@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import QAicon from '../../assets/qa-icon.png';
 import JSONicon from '../../assets/json-icon.png';
-// import audienceIcon from '../../assets/audience-icon.png';
+import audienceIcon from '../../assets/audience-icon.png';
 import deepLinkIcon from '../../assets/deep-link-icon.png';
 import externalLinkIcon from '../../assets/external-link-icon.png';
+
 import '../../styles/App.css';
+import { AudienceModal } from './style';
 
 
 export default function ViewJsonButton(props) {
-  const {details, audienceIds, experienceName } = props.offer;
-  // const {audienceIds} = props.offer;
+  const {details, audienceDetails, experienceName } = props.offer;
 
   const [isVisible, setIsVisible] = useState(false);
-  const [modalContent, setModalContent] = useState({...details, audienceIds, experienceName});
+  const [modalContent, setModalContent] = useState({...details.content});
+  const [modalContentType, setModalContentType] = useState('offer');
 
   const deeplink = details.content.payload.acao || details.content.payload.deeplink || details.content.payload.linkExterno;
 
@@ -23,30 +26,62 @@ export default function ViewJsonButton(props) {
     return regex.test(link);
   };
 
-  const handleModalContent = (content) => {
+  const isQA = [2437296, 2143318, 2565598, 2544056, 2567469, 2571312].includes(audienceDetails.id);
+
+  const handleModalContent = (content, type) => {
     setIsVisible(true);
+    setModalContentType(type);
     setModalContent(content);
+
+    // window.dataLayer = window.dataLayer || [];
+    // window.dataLayer.push({
+    //   'event': 'button_click',
+    //   'buttonInfo': {
+    //     'space': details.content.payload.espaco,
+    //     'mBox': details.content.payload.mBox,
+    //     'buttonType': 'view_json',
+    //     'offer': details.content.payload.nomeOferta
+    //   }
+    // });
   };
+
+  // const handleButtonClick = (type) => {
+  //   window.dataLayer = window.dataLayer || [];
+  //   window.dataLayer.push({
+  //     'event': 'button_click',
+  //     'buttonInfo': {
+  //       'space': details.content.payload.espaco,
+  //       'mBox': details.content.payload.mBox,
+  //       'buttonType': type,
+  //       'offer': details.content.payload.nomeOferta
+  //     }
+  //   });
+  // };
 
   return (
     <>
       <div className='icons-container'>
-        <button className="icons" type="button" onClick={() => handleModalContent({...details, audienceIds, experienceName})}>
-          <img src={JSONicon} alt="Visualizar JSON" />
+        {isQA && (
+          <button title="QA: Oferta em validação ou testes" className="icons disabled-link" type="button" disabled>
+            <img src={QAicon} alt="Ícone de um balão Erlenmeyer, um recipiente utilizado em laboratórios químicos"/>
+          </button>
+        )}
+        <button title="Visualizar JSON" className="icons" type="button" onClick={() => handleModalContent({...details.content}, 'offer')}>
+          <img src={JSONicon} alt="Ícone de um sinal de reticências entre chaves. {...}"/>
         </button>
-        {/* <button className="icons" type="button" onClick={() => handleModalContent({experienceName, audienceIds})}>
-          <img src={audienceIcon} alt="Visualizar ID da audiência" />
-        </button> */}
+        <button title="Audiência" className="icons" type="button" onClick={() => handleModalContent({experienceName, audienceDetails, offerId: details.id, ...details.content.payload}, 'audience')}>
+          <img src={audienceIcon} alt="Ícone de um grupo de pessoas" />
+        </button>
         {/* eslint-disable-next-line react/jsx-no-target-blank */}
         {
           isExternalOrDeepLink(deeplink)
             ? (<a href={deeplink} target="_blank" rel="noreferrer">
-              <button className={`icons ${!deeplink && 'disabled-link'}`} type="button" disabled={!deeplink}>
-                <img src={externalLinkIcon} alt="Acessar External Link" />
+              <button className={`icons ${!deeplink && 'disabled-link'}`} type="button" title="Navegar para link externo" disabled={!deeplink}>
+                <img src={externalLinkIcon} alt="Ícone de uma corrente com dois elos" />
               </button>
             </a>) : (
-              <button className="icons disabled-link" type="button" disabled>
-                <img src={deepLinkIcon} alt="Deep Link" />
+              <button className="icons disabled-link" type="button" title="Deeplink" disabled>
+                <img src={deepLinkIcon} alt="Ícone com duas telas de smartphones, com uma seta que aponta para direita e sobrepõe ambas as telas" />
               </button>
             )
         }
@@ -55,9 +90,26 @@ export default function ViewJsonButton(props) {
         <main className="overlay">
           <div className="modal">
             <button className="close" type="button" onClick={() => setIsVisible(false)}>X</button>
-            <pre>
-              {JSON.stringify(modalContent, null, 2)}
-            </pre>
+            {modalContentType === 'offer' ? (
+              <pre>
+                {JSON.stringify(modalContent, null, 2)}
+              </pre>
+            ) : (
+              <AudienceModal>
+                <p>
+                  <strong>Audience Id: </strong>
+                  <a href={`https://api-qa-spaces-target.onrender.com/audience/${modalContent.audienceDetails.id}`} target="_blank" rel="noopener noreferrer">
+                    {modalContent.audienceDetails.id}
+                  </a>
+                </p>
+                <p><strong>Audience: </strong>{modalContent.audienceDetails.name}</p>
+                <p><strong>Experience: </strong>{modalContent.experienceName}</p>
+                <hr/>
+                <p><strong>Offer Id: </strong>{modalContent.offerId}</p>
+                <p><strong>Offer: </strong>{modalContent.nomeOferta || modalContent.name}</p>
+              </AudienceModal>
+            )}
+            
           </div>
         </main>
       )}

@@ -26,7 +26,7 @@ export default function Header(props) {
         {/* <img className="logos" src={logoPan} /> */}
         {/* </div> */}
         <div className="app-titles-container">
-          <h1 className="app-title">LCGBR Toolkit<br/><span className="app-subtitle">QA - Spaces do Adobe Target</span></h1>
+          <h1 className="app-title">LCGBR Toolkit<br/><span className="app-subtitle">QA - Spaces Adobe Target</span></h1>
         </div>
         <div className='buttons'>
           <select value={selectedSpace} onChange={(e) => setSelectedSpace(e.target.value)}>
@@ -40,8 +40,8 @@ export default function Header(props) {
             <option value="DashCartão">Dash Cartão</option>
             <option value="DashConta">Dash Conta</option>
             <option value="DashCredito">Dash Crédito</option>
-            <option value="Modal Toast - Home Cartao">Toast - Home Cartão</option>
-            <option value="Modal Toast - Home Conta">Toast - Home Conta</option>
+            <option value="Modal Toast - Home Cartao">Modal Toast - Cartão</option>
+            <option value="Modal Toast - Home Conta">Modal Toast - Conta</option>
             {/* <option value="Modal Toast - Home Credito">Toast - Home Credito</option>
             <option value="">Web - Desktop1</option>
             <option value="">Web - Desktop2</option>
