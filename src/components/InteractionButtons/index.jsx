@@ -9,8 +9,7 @@ import externalLinkIcon from '../../assets/external-link-icon.png';
 import '../../styles/App.css';
 import { AudienceModal } from './style';
 
-
-export default function ViewJsonButton(props) {
+export default function InteractionButtons(props) {
   const {details, audienceDetails, experienceName } = props.offer;
 
   const [isVisible, setIsVisible] = useState(false);
@@ -96,9 +95,15 @@ export default function ViewJsonButton(props) {
               </pre>
             ) : (
               <AudienceModal>
+                {props.priority && (
+                  <>
+                    <p><strong>Priority: </strong>{props.priority}</p>
+                    <hr/>
+                  </>
+                )}
                 <p>
                   <strong>Audience Id: </strong>
-                  <a href={`https://api-qa-spaces-target.onrender.com/audience/${modalContent.audienceDetails.id}`} target="_blank" rel="noopener noreferrer">
+                  <a href={`https://api-qa-spaces-target.onrender.com/audiences/${modalContent.audienceDetails.id}`} target="_blank" rel="noopener noreferrer">
                     {modalContent.audienceDetails.id}
                   </a>
                 </p>
@@ -117,6 +122,6 @@ export default function ViewJsonButton(props) {
   );
 }
 
-ViewJsonButton.propTypes = {
+InteractionButtons.propTypes = {
   offer: PropTypes.object,
 }.isRequired;
