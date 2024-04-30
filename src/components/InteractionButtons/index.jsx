@@ -95,12 +95,6 @@ export default function InteractionButtons(props) {
               </pre>
             ) : (
               <AudienceModal>
-                {props.priority && (
-                  <>
-                    <p><strong>Priority: </strong>{props.priority}</p>
-                    <hr/>
-                  </>
-                )}
                 <p>
                   <strong>Audience Id: </strong>
                   <a href={`https://api-qa-spaces-target.onrender.com/audiences/${modalContent.audienceDetails.id}`} target="_blank" rel="noopener noreferrer">
@@ -112,6 +106,7 @@ export default function InteractionButtons(props) {
                 <hr/>
                 <p><strong>Offer Id: </strong>{modalContent.offerId}</p>
                 <p><strong>Offer: </strong>{modalContent.nomeOferta || modalContent.name}</p>
+                {props.priority && (<p><strong>Priority: </strong>{props.priority}</p>)}
               </AudienceModal>
             )}
             
