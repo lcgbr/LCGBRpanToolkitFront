@@ -22,7 +22,9 @@ export default function OfferCard(props) {
         <p title={getOfferName(offer)}><strong>Oferta: </strong>{getOfferName(offer)}</p>
       </CardTitles>
       <CardContainer>
-        <span title="Posição">{offer.position}</span>
+        <span title={
+          props.priority ? `Posição: ${offer.position}\nPrioridade: ${props.priority}` : 'Posição'
+        }>{offer.position}</span>
         {payload.imagemURL
           ? (
             <ImageContainer space={payload.espaco}>
@@ -42,4 +44,5 @@ export default function OfferCard(props) {
 
 OfferCard.propTypes = {
   offer: PropTypes.object,
+  priority: PropTypes.number,
 }.isRequired;

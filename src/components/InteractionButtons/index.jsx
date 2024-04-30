@@ -119,4 +119,5 @@ export default function InteractionButtons(props) {
 
 InteractionButtons.propTypes = {
   offer: PropTypes.object,
+  priority: PropTypes.number,
 }.isRequired;

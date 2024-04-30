@@ -41,7 +41,7 @@ export default function Main(props) {
               </div>
               {activity.options.map((offer, idx) => 
                 <div className="main-box" key={idx}>
-                  <OfferCard offer={offer} />
+                  <OfferCard offer={offer} priority={activity.priority}/>
                   <InteractionButtons offer={offer} priority={activity.priority}/>
                 </div>
               )}
