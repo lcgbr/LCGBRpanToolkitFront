@@ -14,17 +14,28 @@ export default function Main(props) {
     spaceData,
   } = props;
 
-  const separatedTitle = (str) => {
+  const splitTitleString = (titleString) => {
+    const titleSections = {
+      mainTitle: titleString,
+      audienceSection: null,
+      dateSection: null
+    };
+
     const regex = /\(.*\)/; // Regex para pegar o conteúdo entre parênteses
-    const match = str.match(regex);
-    
+    const match = titleString.match(regex);
+
     if (match) {
-      const description = str.replace(match[0], '').trim();
-      const datesInfo = match[0].replace(/[()]/g, '').trim();
-      return { description, datesInfo };
-    } else {
-      return { description: str, datesInfo: null };
-    }
+      titleSections.mainTitle = titleString.replace(match[0], '').trim();
+      titleSections.dateSection = match[0].replace(/[()]/g, '').trim();
+
+    } else if(titleString.includes('|')) {
+      const [mainTitle, audienceSection, dateSection = null] = titleString.split(' | ');
+      titleSections.mainTitle = mainTitle;
+      titleSections.audienceSection = audienceSection;
+      titleSections.dateSection = dateSection;
+    } 
+
+    return titleSections;
   };
 
   return (
@@ -32,21 +43,26 @@ export default function Main(props) {
       {errorMessage && <p className='token-error'>Ops! Algo deu errado :(<br/>{errorMessage}</p>}
       {isLoading ? <Loading /> : (
         <div className="activity">
-          {spaceData.map((activity, index) =>
-            <section key={index}>
-              <div className="activity-title">
-                <h3>{separatedTitle(activity.name).description}</h3>
-                <p>{separatedTitle(activity.name).datesInfo}</p>
-                <strong>{`${activity.options.length} ${activity.options.length === 1 ? 'Oferta' : 'Ofertas' }`}</strong>
-              </div>
-              {activity.options.map((offer, idx) => 
-                <div className="main-box" key={idx}>
-                  <OfferCard offer={offer} priority={activity.priority}/>
-                  <InteractionButtons offer={offer} priority={activity.priority}/>
+          {spaceData.map((activity, index) => {
+            const {mainTitle, audienceSection, dateSection } = splitTitleString(activity.name);
+            const numberOfOffersText = `${activity.options.length} ${ activity.options.length === 1 ? 'Oferta' : 'Ofertas'}`;
+            return (
+              <section key={index}>
+                <div className="activity-title">
+                  <h3>{mainTitle}</h3>
+                  <p>{dateSection}</p>
+                  {audienceSection && (<p>{audienceSection}</p>)}
+                  <strong>{numberOfOffersText}</strong>
                 </div>
-              )}
-            </section>
-          )}
+                {activity.options.map((offer, idx) => 
+                  <div className="main-box" key={idx}>
+                    <OfferCard offer={offer} priority={activity.priority}/>
+                    <InteractionButtons offer={offer} priority={activity.priority}/>
+                  </div>
+                )}
+              </section>
+            );
+          })}
         </div >
       )}
     </main>
