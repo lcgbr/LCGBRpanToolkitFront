@@ -3,7 +3,6 @@ import { fetchSpaceContent } from '../src/utils/api';
 import Header from './components/Header';
 import Main from './components/Main';
 import GlobalStyles from './styles/GlobalStyles';
-import './styles/App.css';
 
 function App() {
   const [selectedSpace, setSelectedSpace] = useState('dashResumo1');
