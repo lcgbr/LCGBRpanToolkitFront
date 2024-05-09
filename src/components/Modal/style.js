@@ -1,4 +1,6 @@
-.overlay {
+import styled from 'styled-components';
+
+export const Overlay = styled.main`
   left: 0;
   top: 0;
   background: rgba(0,0,0,0.8);
@@ -10,9 +12,9 @@
   align-items: center;
   justify-content: center;
   z-index: 998;
-}
+`;
 
-.modal {
+export const ModalContainer = styled.div`
   position: relative;
   background: #fff;
   border-radius: 8px;
@@ -29,9 +31,9 @@
   max-width: 90%;
   z-index: 999;
   cursor: text;
-}
+`;
 
-button.close {
+export const CloseButton = styled.button`
   position: absolute;
   top: 15px;
   right: 15px;
@@ -40,18 +42,8 @@ button.close {
   border-radius: 100%;
   height: 50px;
   width: 50px;
-}
 
-button.close:hover {
-  color: #535bf2;
-}
-
-pre.pre {
-  width: 300px;
-  text-align: left;
-  font-size: 10px;
-  font-weight: 400;
-  line-break: normal;
-  /* white-space: pre-wrap;
-  word-wrap: break-word; */
-}
+  &:hover {
+    color: #535bf2;
+  }
+`;

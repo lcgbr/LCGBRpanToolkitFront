@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import icons from '../../../assets';
+import IconButton from '../IconButton';
+import Modal from '../../Modal';
 
-import '../../../styles/App.css';
-import { AudienceModal, IconsContainer, IconButton } from './style';
+import { IconsContainer, AudienceModal } from './style';
 
 
 export default function CardButtons(props) {
-  const {details, audienceDetails, experienceName } = props.offer;
+  const { details, audienceDetails, experienceName } = props.offer;
+  const { content } = details;
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [modalContent, setModalContent] = useState({...details.content});
-  const [modalContentType, setModalContentType] = useState('offer');
+  const [isOfferModalVisible, setOfferModalVisible] = useState(false);
+  const [isAudienceModalVisible, setAudienceModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState({...content});
 
-  const deepLink = details.content.payload.acao || details.content.payload.deeplink || details.content.payload.linkExterno;
+  const deepLink = content.payload.acao || content.payload.deeplink || content.payload.linkExterno;
 
   const isExternalOrDeepLink = (link) => {
     const regex = /^(http|https):\/\//;
@@ -51,8 +53,8 @@ export default function CardButtons(props) {
   };
 
   const handleModalContent = (content, type) => {
-    setIsVisible(true);
-    setModalContentType(type);
+    if (type === 'offer') setOfferModalVisible(true);
+    if (type === 'audience') setAudienceModalVisible(true);
     setModalContent(content);
 
     // window.dataLayer = window.dataLayer || [];
@@ -83,85 +85,49 @@ export default function CardButtons(props) {
   return (
     <>
       <IconsContainer>
-        {isQA && (
-          <IconButton
-            type="button"
-            disabledLink={true}
-            title={buttonProps.qa.title}
-            disabled
-          >
-            <img src={buttonProps.qa.src} alt={buttonProps.qa.alt}/>
-          </IconButton>
+        {isQA && <IconButton buttonProps={buttonProps.qa} isDisabled />}
+        <IconButton
+          buttonProps={buttonProps.json}
+          onClick={() => handleModalContent({...content}, 'offer')}
+        />
+        <IconButton
+          buttonProps={buttonProps.audience}
+          onClick={() => handleModalContent({experienceName, audienceDetails, offerId: details.id, ...content.payload}, 'audience')}
+        />
+        {isExternalOrDeepLink(deepLink) ? (
+          <a href={deepLink} target="_blank" rel="noreferrer">
+            <IconButton buttonProps={buttonProps.externalLink} isDisabled={!deepLink} />
+          </a>
+        ) : (
+          <IconButton buttonProps={buttonProps.deepLink} isDisabled />
         )}
-        <IconButton
-          type="button"
-          disabledLink={false}
-          title={buttonProps.json.title}
-          onClick={() => handleModalContent({...details.content}, 'offer')}
-        >
-          <img src={buttonProps.json.src} alt={buttonProps.json.alt}/>
-        </IconButton>
-        <IconButton
-          type="button"
-          disabledLink={false}
-          title={buttonProps.audience.title}
-          onClick={() => handleModalContent({experienceName, audienceDetails, offerId: details.id, ...details.content.payload}, 'audience')}
-        >
-          <img src={buttonProps.audience.src} alt={buttonProps.audience.alt} />
-        </IconButton>
-        {
-          isExternalOrDeepLink(deepLink)
-            ? (
-              <a href={deepLink} target="_blank" rel="noreferrer">
-                <IconButton
-                  type="button"
-                  disabledLink={!deepLink}
-                  title={buttonProps.externalLink.title}
-                  disabled={!deepLink}
-                >
-                  <img src={buttonProps.externalLink.src} alt={buttonProps.externalLink.alt} />
-                </IconButton>
-              </a>
-            ) : (
-              <IconButton
-                disabledLink={true}
-                type="button"
-                title={buttonProps.deepLink.title}
-                disabled
-              >
-                <img src={buttonProps.deepLink.src} alt={buttonProps.deepLink.alt} />
-              </IconButton>
-            )
-        }
       </IconsContainer>
-      {isVisible && (
-        <main className="overlay">
-          <div className="modal">
-            <button className="close" type="button" onClick={() => setIsVisible(false)}>X</button>
-            {modalContentType === 'offer' ? (
-              <pre>
-                {JSON.stringify(modalContent, null, 2)}
-              </pre>
-            ) : (
-              <AudienceModal>
-                <p>
-                  <strong>Audience Id: </strong>
-                  <a href={`https://api-qa-spaces-target.onrender.com/audiences/${modalContent.audienceDetails.id}`} target="_blank" rel="noopener noreferrer">
-                    {modalContent.audienceDetails.id}
-                  </a>
-                </p>
-                <p><strong>Audience: </strong>{modalContent.audienceDetails.name}</p>
-                <p><strong>Experience: </strong>{modalContent.experienceName}</p>
-                <hr/>
-                <p><strong>Offer Id: </strong>{modalContent.offerId}</p>
-                <p><strong>Offer: </strong>{modalContent.nomeOferta || modalContent.name}</p>
-                {props.priority && (<p><strong>Priority: </strong>{props.priority}</p>)}
-              </AudienceModal>
-            )}
-            
-          </div>
-        </main>
-      )}
+      
+      { 
+        isOfferModalVisible &&
+        <Modal setIsVisible={setOfferModalVisible}>
+          <pre>{JSON.stringify(modalContent, null, 2)}</pre>
+        </Modal>
+      }
+      {
+        isAudienceModalVisible &&
+        <Modal setIsVisible={setAudienceModalVisible}>
+          <AudienceModal>
+            <p>
+              <strong>Audience Id: </strong>
+              <a href={`https://api-qa-spaces-target.onrender.com/audiences/${modalContent.audienceDetails.id}`} target="_blank" rel="noopener noreferrer">
+                {modalContent.audienceDetails.id}
+              </a>
+            </p>
+            <p><strong>Audience: </strong>{modalContent.audienceDetails.name}</p>
+            <p><strong>Experience: </strong>{modalContent.experienceName}</p>
+            <hr/>
+            <p><strong>Offer Id: </strong>{modalContent.offerId}</p>
+            <p><strong>Offer: </strong>{modalContent.nomeOferta || modalContent.name}</p>
+            {props.priority && (<p><strong>Priority: </strong>{props.priority}</p>)}
+          </AudienceModal>
+        </Modal>
+      }
     </>
   );
 }

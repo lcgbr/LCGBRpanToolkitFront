@@ -36,7 +36,7 @@ export default function Main(props) {
       titleSections.mainTitle = titleString.replace(match[0], '').trim();
       titleSections.dateSection = match[0].replace(/[()]/g, '').trim();
 
-    } else if(titleString.includes('|')) {
+    } else if (titleString.includes('|')) {
       const [mainTitle, audienceSection, dateSection = null] = titleString.split(' | ');
       titleSections.mainTitle = mainTitle;
       titleSections.audienceSection = audienceSection;
@@ -55,7 +55,7 @@ export default function Main(props) {
         ) : (
           <ActivityGroup>
             {spaceData.map((activity, index) => {
-              const {mainTitle, audienceSection, dateSection } = splitTitleString(activity.name);
+              const { mainTitle, audienceSection, dateSection } = splitTitleString(activity.name);
               const numberOfOffersText = `${activity.options.length} ${ activity.options.length === 1 ? 'Oferta' : 'Ofertas'}`;
               return (
                 <ActivityContainer key={index}>

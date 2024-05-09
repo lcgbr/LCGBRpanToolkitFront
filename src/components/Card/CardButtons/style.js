@@ -7,39 +7,17 @@ export const IconsContainer = styled.div`
   justify-content: flex-end;
 `;
 
-export const IconButton = styled.button`
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  background-color: #fff;
-  border-radius: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    width: 20px;
-    height: 20px;
-  }
-
-  &:hover {
-    background-color: #06B2FC;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: default;
-    transition: none;
-  }
-
-  &:disabled:hover {
-    background-color: #fff;
-    border-style: none;
-  }
-`;
+// export const jsonModal = styled.pre`
+//   width: 300px;
+//   text-align: left;
+//   font-size: 10px;
+//   font-weight: 400;
+//   line-break: normal;
+//   white-space: pre-wrap;
+//   word-wrap: break-word;
+// `;
 
 export const AudienceModal = styled.div`
-
   & a {
     color: inherit;
     cursor: inherit;
