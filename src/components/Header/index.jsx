@@ -1,34 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import logoLCG from '../../assets/lcgbr-white-logo.webp';
-import '../../styles/App.css';
 
-// import SendTokenModal from '../SendTokenModal';
-// import logoPan from '../assets/pan-white-logo.png';
+import { HeaderContainer, HeaderTitle, HeaderButton } from './style';
+
 
 export default function Header(props) {
-  const {
-    selectedSpace,
-    setSelectedSpace,
-    // getSpaceContent,
-    // errorMessage
-  } = props;
-
-  // const [isVisible, setIsVisible] = useState(false);
+  const { selectedSpace, setSelectedSpace } = props;
 
   return (
     <>
-      <header>
-        {/* <div className="logos-container" > */}
+      <HeaderContainer>
         <a href="https://www.limaconsulting.com/pt-br/" target='_blank' rel="noreferrer">
-          <img className="logos" src={logoLCG} />
+          <img src={logoLCG} />
         </a>
-        {/* <img className="logos" src={logoPan} /> */}
-        {/* </div> */}
-        <div className="app-titles-container">
-          <h1 className="app-title">LCGBR Toolkit<br/><span className="app-subtitle">QA - Spaces Adobe Target</span></h1>
-        </div>
-        <div className='buttons'>
+        <HeaderTitle>
+          <h1>LCGBR Toolkit
+            <br/>
+            <span>QA - Spaces Adobe Target</span>
+          </h1>
+        </HeaderTitle>
+        <HeaderButton>
           <select value={selectedSpace} onChange={(e) => setSelectedSpace(e.target.value)}>
             <option value="dashResumo1">Dash Resumo 1</option>
             <option value="dashResumo2">Dash Resumo 2</option>
@@ -49,19 +41,9 @@ export default function Header(props) {
             <option value="">Web - Mobile1</option>
             <option value="">Web - Mobile2</option>
             <option value="">Web - Mobile3</option> */}
-
           </select>
-          {/* <button 
-            className={errorMessage === 'Parece que o token fornecido é inválido ou expirou.' && 'required-token'}
-            type="button"
-            onClick={() => setIsVisible(true)
-            }>
-            Informar Token
-          </button> */}
-        </div>
-      </header>
-
-      {/* {isVisible && <SendTokenModal setIsVisible={setIsVisible} getSpaceContent={getSpaceContent}/>} */}
+        </HeaderButton>
+      </HeaderContainer>
     </>
   );
 }

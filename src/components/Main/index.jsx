@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import OfferCard from '../OfferCard';
-import InteractionButtons from '../InteractionButtons';
+import OfferCard from '../Card/OfferCard';
+import CardButtons from '../Card/CardButtons';
 import Loading from '../Loading';
 
 import '../../styles/App.css';
@@ -57,7 +57,7 @@ export default function Main(props) {
                 {activity.options.map((offer, idx) => 
                   <div className="main-box" key={idx}>
                     <OfferCard offer={offer} priority={activity.priority}/>
-                    <InteractionButtons offer={offer} priority={activity.priority}/>
+                    <CardButtons offer={offer} priority={activity.priority}/>
                   </div>
                 )}
               </section>

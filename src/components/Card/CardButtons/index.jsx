@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import QAicon from '../../assets/qa-icon.png';
-import JSONicon from '../../assets/json-icon.png';
-import audienceIcon from '../../assets/audience-icon.png';
-import deepLinkIcon from '../../assets/deep-link-icon.png';
-import externalLinkIcon from '../../assets/external-link-icon.png';
+import icons from '../../../assets';
 
-import '../../styles/App.css';
+import '../../../styles/App.css';
 import { AudienceModal } from './style';
 
-export default function InteractionButtons(props) {
+
+export default function CardButtons(props) {
   const {details, audienceDetails, experienceName } = props.offer;
 
   const [isVisible, setIsVisible] = useState(false);
@@ -26,6 +23,34 @@ export default function InteractionButtons(props) {
   };
 
   const isQA = [2437296, 2143318, 2565598, 2544056, 2567469, 2571312].includes(audienceDetails.id);
+
+  const buttonProps = {
+    qa :{
+      title: 'QA: Oferta em validação ou testes',
+      alt: 'Ícone de um balão Erlenmeyer, um recipiente utilizado em laboratórios químicos',
+      src: icons.QA,
+    },
+    json: {
+      title: 'Ver conteúdo do JSON',
+      alt: 'Ícone de um sinal de reticências entre chaves. {...}',
+      src: icons.JSON,
+    },
+    audience: {
+      title: 'Ver dados de Audiência',
+      alt: 'Ícone de um grupo de pessoas',
+      src: icons.audience,
+    },
+    deepLink: {
+      title: 'Deep Link',
+      alt: 'Ícone com duas telas de smartphones, com uma seta que aponta para direita e sobrepõe ambas as telas',
+      src: icons.deepLink,
+    },
+    externalLink: {
+      title: 'Navegar para link externo',
+      alt: 'Ícone de uma corrente com dois elos',
+      src: icons.externalLink,
+    }
+  };
 
   const handleModalContent = (content, type) => {
     setIsVisible(true);
@@ -61,26 +86,52 @@ export default function InteractionButtons(props) {
     <>
       <div className='icons-container'>
         {isQA && (
-          <button title="QA: Oferta em validação ou testes" className="icons disabled-link" type="button" disabled>
-            <img src={QAicon} alt="Ícone de um balão Erlenmeyer, um recipiente utilizado em laboratórios químicos"/>
+          <button
+            type="button"
+            className="icons disabled-link"
+            title={buttonProps.qa.title}
+            disabled
+          >
+            <img src={buttonProps.qa.src} alt={buttonProps.qa.alt}/>
           </button>
         )}
-        <button title="Visualizar JSON" className="icons" type="button" onClick={() => handleModalContent({...details.content}, 'offer')}>
-          <img src={JSONicon} alt="Ícone de um sinal de reticências entre chaves. {...}"/>
+        <button
+          type="button"
+          className="icons"
+          title={buttonProps.json.title}
+          onClick={() => handleModalContent({...details.content}, 'offer')}
+        >
+          <img src={buttonProps.json.src} alt={buttonProps.json.alt}/>
         </button>
-        <button title="Audiência" className="icons" type="button" onClick={() => handleModalContent({experienceName, audienceDetails, offerId: details.id, ...details.content.payload}, 'audience')}>
-          <img src={audienceIcon} alt="Ícone de um grupo de pessoas" />
+        <button
+          type="button"
+          className="icons"
+          title={buttonProps.audience.title}
+          onClick={() => handleModalContent({experienceName, audienceDetails, offerId: details.id, ...details.content.payload}, 'audience')}
+        >
+          <img src={buttonProps.audience.src} alt={buttonProps.audience.alt} />
         </button>
-        {/* eslint-disable-next-line react/jsx-no-target-blank */}
         {
           isExternalOrDeepLink(deeplink)
-            ? (<a href={deeplink} target="_blank" rel="noreferrer">
-              <button className={`icons ${!deeplink && 'disabled-link'}`} type="button" title="Navegar para link externo" disabled={!deeplink}>
-                <img src={externalLinkIcon} alt="Ícone de uma corrente com dois elos" />
-              </button>
-            </a>) : (
-              <button className="icons disabled-link" type="button" title="Deeplink" disabled>
-                <img src={deepLinkIcon} alt="Ícone com duas telas de smartphones, com uma seta que aponta para direita e sobrepõe ambas as telas" />
+            ? (
+              <a href={deeplink} target="_blank" rel="noreferrer">
+                <button
+                  type="button"
+                  className={`icons ${!deeplink && 'disabled-link'}`}
+                  title={buttonProps.externalLink.title}
+                  disabled={!deeplink}
+                >
+                  <img src={buttonProps.externalLink.src} alt={buttonProps.externalLink.alt} />
+                </button>
+              </a>
+            ) : (
+              <button
+                className="icons disabled-link"
+                type="button"
+                title={buttonProps.deepLink.title}
+                disabled
+              >
+                <img src={buttonProps.deepLink.src} alt={buttonProps.deepLink.alt} />
               </button>
             )
         }
@@ -117,7 +168,7 @@ export default function InteractionButtons(props) {
   );
 }
 
-InteractionButtons.propTypes = {
+CardButtons.propTypes = {
   offer: PropTypes.object,
   priority: PropTypes.number,
 }.isRequired;
