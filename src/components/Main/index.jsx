@@ -4,7 +4,15 @@ import OfferCard from '../Card/OfferCard';
 import CardButtons from '../Card/CardButtons';
 import Loading from '../Loading';
 
-import '../../styles/App.css';
+import {
+  Error, 
+  MainContainer, 
+  ActivityGroup, 
+  ActivityContainer, 
+  ActivityTitle,
+  ActivityContent
+} from './style';
+
 
 export default function Main(props) {
 
@@ -39,33 +47,37 @@ export default function Main(props) {
   };
 
   return (
-    <main className={`main-container ${spaceData.length <= 3 ? 'justify-center' : ''}`}>
-      {errorMessage && <p className='token-error'>Ops! Algo deu errado :(<br/>{errorMessage}</p>}
-      {isLoading ? <Loading /> : (
-        <div className="activity">
-          {spaceData.map((activity, index) => {
-            const {mainTitle, audienceSection, dateSection } = splitTitleString(activity.name);
-            const numberOfOffersText = `${activity.options.length} ${ activity.options.length === 1 ? 'Oferta' : 'Ofertas'}`;
-            return (
-              <section key={index}>
-                <div className="activity-title">
-                  <h3>{mainTitle}</h3>
-                  <p>{dateSection}</p>
-                  {audienceSection && (<p>{audienceSection}</p>)}
-                  <strong>{numberOfOffersText}</strong>
-                </div>
-                {activity.options.map((offer, idx) => 
-                  <div className="main-box" key={idx}>
-                    <OfferCard offer={offer} priority={activity.priority}/>
-                    <CardButtons offer={offer} priority={activity.priority}/>
-                  </div>
-                )}
-              </section>
-            );
-          })}
-        </div >
-      )}
-    </main>
+    <MainContainer justify={spaceData.length <= 3}>
+      {errorMessage && <Error>Ops! Algo deu errado :(<br/>{errorMessage}</Error>}
+      {
+        isLoading ? (
+          <Loading />
+        ) : (
+          <ActivityGroup>
+            {spaceData.map((activity, index) => {
+              const {mainTitle, audienceSection, dateSection } = splitTitleString(activity.name);
+              const numberOfOffersText = `${activity.options.length} ${ activity.options.length === 1 ? 'Oferta' : 'Ofertas'}`;
+              return (
+                <ActivityContainer key={index}>
+                  <ActivityTitle>
+                    <h2>{mainTitle}</h2>
+                    <p>{dateSection}</p>
+                    <p>{audienceSection}</p>
+                    <strong>{numberOfOffersText}</strong>
+                  </ActivityTitle>
+                  {activity.options.map((offer, idx) => 
+                    <ActivityContent key={idx}>
+                      <OfferCard offer={offer} priority={activity.priority}/>
+                      <CardButtons offer={offer} priority={activity.priority}/>
+                    </ActivityContent>
+                  )}
+                </ActivityContainer>
+              );
+            })}
+          </ActivityGroup >
+        )
+      }
+    </MainContainer>
   );
 }
 

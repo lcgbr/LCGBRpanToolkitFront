@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import icons from '../../../assets';
 
 import '../../../styles/App.css';
-import { AudienceModal } from './style';
+import { AudienceModal, IconsContainer, IconButton } from './style';
 
 
 export default function CardButtons(props) {
@@ -13,9 +13,7 @@ export default function CardButtons(props) {
   const [modalContent, setModalContent] = useState({...details.content});
   const [modalContentType, setModalContentType] = useState('offer');
 
-  const deeplink = details.content.payload.acao || details.content.payload.deeplink || details.content.payload.linkExterno;
-
-  // const mensagem = 'Não é possível redirecionar. Deeplinks são destinados a abrir aplicativos em dispositivos móveis e não são navegáveis em um web browser padrão';
+  const deepLink = details.content.payload.acao || details.content.payload.deeplink || details.content.payload.linkExterno;
 
   const isExternalOrDeepLink = (link) => {
     const regex = /^(http|https):\/\//;
@@ -84,58 +82,58 @@ export default function CardButtons(props) {
 
   return (
     <>
-      <div className='icons-container'>
+      <IconsContainer>
         {isQA && (
-          <button
+          <IconButton
             type="button"
-            className="icons disabled-link"
+            disabledLink={true}
             title={buttonProps.qa.title}
             disabled
           >
             <img src={buttonProps.qa.src} alt={buttonProps.qa.alt}/>
-          </button>
+          </IconButton>
         )}
-        <button
+        <IconButton
           type="button"
-          className="icons"
+          disabledLink={false}
           title={buttonProps.json.title}
           onClick={() => handleModalContent({...details.content}, 'offer')}
         >
           <img src={buttonProps.json.src} alt={buttonProps.json.alt}/>
-        </button>
-        <button
+        </IconButton>
+        <IconButton
           type="button"
-          className="icons"
+          disabledLink={false}
           title={buttonProps.audience.title}
           onClick={() => handleModalContent({experienceName, audienceDetails, offerId: details.id, ...details.content.payload}, 'audience')}
         >
           <img src={buttonProps.audience.src} alt={buttonProps.audience.alt} />
-        </button>
+        </IconButton>
         {
-          isExternalOrDeepLink(deeplink)
+          isExternalOrDeepLink(deepLink)
             ? (
-              <a href={deeplink} target="_blank" rel="noreferrer">
-                <button
+              <a href={deepLink} target="_blank" rel="noreferrer">
+                <IconButton
                   type="button"
-                  className={`icons ${!deeplink && 'disabled-link'}`}
+                  disabledLink={!deepLink}
                   title={buttonProps.externalLink.title}
-                  disabled={!deeplink}
+                  disabled={!deepLink}
                 >
                   <img src={buttonProps.externalLink.src} alt={buttonProps.externalLink.alt} />
-                </button>
+                </IconButton>
               </a>
             ) : (
-              <button
-                className="icons disabled-link"
+              <IconButton
+                disabledLink={true}
                 type="button"
                 title={buttonProps.deepLink.title}
                 disabled
               >
                 <img src={buttonProps.deepLink.src} alt={buttonProps.deepLink.alt} />
-              </button>
+              </IconButton>
             )
         }
-      </div>
+      </IconsContainer>
       {isVisible && (
         <main className="overlay">
           <div className="modal">
