@@ -3,28 +3,24 @@ import PropTypes from 'prop-types';
 import { CardContainer, CardContent, ImageContainer, CardTitles } from './style';
 
 export default function OfferCard(props) {
-  const { offer } = props;
+  const { offer, priority } = props;
   const { payload } = props.offer.details.content;
 
   const title = payload.titulo || payload.title;
   const subtitle = payload.subtitulo || payload.description;
   const cardButton = payload.botao || payload.button;
+  const offerName = offer.details.content.payload.nomeOferta || offer.details.content.payload.name;
   const hasAllContent = title && subtitle && cardButton;
-
-  const getOfferName = (offer) => {
-    return offer.details.content.payload.nomeOferta || offer.details.content.payload.name;
-  };
+  const positionTextInfo = priority ? `Posição: ${offer.position}\nPrioridade: ${props.priority}` : 'Posição';
 
   return (
     <>
       <CardTitles>
         <p title={offer.audienceDetails.name}><strong>Audiência: </strong>{offer.audienceDetails.name}</p>
-        <p title={getOfferName(offer)}><strong>Oferta: </strong>{getOfferName(offer)}</p>
+        <p title={offerName}><strong>Oferta: </strong>{offerName}</p>
       </CardTitles>
       <CardContainer>
-        <span title={
-          props.priority ? `Posição: ${offer.position}\nPrioridade: ${props.priority}` : 'Posição'
-        }>{offer.position}</span>
+        <span title={positionTextInfo}>{offer.position}</span>
         {payload.imagemURL
           ? (
             <ImageContainer space={payload.espaco}>
