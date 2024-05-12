@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SPACES_ARRAY } from '../../utils/spaces';
 import logoLCG from '../../assets/lcgbr-white-logo.webp';
 
 import { HeaderContainer, HeaderTitle, HeaderButton } from './style';
@@ -22,7 +23,10 @@ export default function Header(props) {
         </HeaderTitle>
         <HeaderButton>
           <select value={selectedSpace} onChange={(e) => setSelectedSpace(e.target.value)}>
-            <option value="dashResumo1">Dash Resumo 1</option>
+            {SPACES_ARRAY.map((space, index) => (
+              <option key={index} value={space.mBox}>{space.displayName}</option>
+            ))}
+            {/* <option value="dashResumo1">Dash Resumo 1</option>
             <option value="dashResumo2">Dash Resumo 2</option>
             <option value="dashResumo3">Dash Resumo 3</option>
             <option value="telaCentralAvisos">Central de Avisos</option>
@@ -33,14 +37,7 @@ export default function Header(props) {
             <option value="DashConta">Dash Conta</option>
             <option value="DashCredito">Dash Crédito</option>
             <option value="Modal Toast - Home Cartao">Modal Toast Cartão</option>
-            <option value="modalHomeContaProd">Modal Toast Conta</option>
-            {/* <option value="Modal Toast - Home Credito">Toast - Home Credito</option>
-            <option value="">Web - Desktop1</option>
-            <option value="">Web - Desktop2</option>
-            <option value="">Web - Desktop3</option>
-            <option value="">Web - Mobile1</option>
-            <option value="">Web - Mobile2</option>
-            <option value="">Web - Mobile3</option> */}
+            <option value="modalHomeContaProd">Modal Toast Conta</option> */}
           </select>
         </HeaderButton>
       </HeaderContainer>
