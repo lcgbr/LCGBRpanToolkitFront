@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CardContainer, CardContent, ImageContainer, CardTitles } from './style';
 
-export default function OfferCard(props) {
+export default function Card(props) {
   const { offer, priority } = props;
   const { payload } = props.offer.details.content;
 
@@ -38,7 +38,7 @@ export default function OfferCard(props) {
   );
 }
 
-OfferCard.propTypes = {
+Card.propTypes = {
   offer: PropTypes.object,
   priority: PropTypes.number,
 }.isRequired;

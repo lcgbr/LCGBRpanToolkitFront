@@ -17,7 +17,7 @@ export default function Header(props) {
         <HeaderTitle>
           <h1>LCGBR Toolkit
             <br/>
-            <span>QA - Spaces Adobe Target</span>
+            <span>QA - Activities Adobe Target</span>
           </h1>
         </HeaderTitle>
         <HeaderButton>

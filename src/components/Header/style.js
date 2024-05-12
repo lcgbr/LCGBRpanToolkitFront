@@ -12,12 +12,13 @@ export const HeaderContainer = styled.header`
   z-index: 997;
 
   img {
-  width: 192px;
+    width: 192px;
+    padding: 8px;
   }
 `;
 
 export const HeaderTitle = styled.div`
-  width: 304px;
+  min-width: 304px;
 
   h1 {
     font-size: 16px;
@@ -35,16 +36,16 @@ export const HeaderButton = styled.div`
   gap: 16px;
 
   select {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #242424;
-  color: rgba(255, 255, 255, 0.87);
-  cursor: pointer;
-  width: 192px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #242424;
+    color: rgba(255, 255, 255, 0.87);
+    cursor: pointer;
+    width: 208px;
 
     &:hover {
       border-color: #646cff;
