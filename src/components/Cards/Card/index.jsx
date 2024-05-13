@@ -24,7 +24,7 @@ export default function Card(props) {
     } else if(name.includes('telaCentralAvisos')) {
       return (<CardCentralAvisos payload={payload} />);
 
-    } else if(name.includes('modalHomeContaProd') || name.includes('Modal Toast - Home Cartao')) {
+    } else if(name.includes('modalHomeContaProd') || name.includes('modalHomeCartaoProd')) {
       return (<CardToast payload={payload} />);
 
     } else {

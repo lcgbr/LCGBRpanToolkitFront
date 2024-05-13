@@ -9,7 +9,7 @@ export const SPACES_OBJECT = {
   DashCartão : { displayName: 'Dash Cartão', mBox: 'DashCartão' },
   DashConta : { displayName: 'Dash Conta', mBox: 'DashConta' },
   DashCredito : { displayName: 'Dash Crédito', mBox: 'DashCredito' },
-  modalHomeCartaoProd : { displayName: 'Modal Toast Cartão', mBox: 'Modal Toast - Home Cartao' },
+  modalHomeCartaoProd : { displayName: 'Modal Toast Cartão', mBox: 'modalHomeCartaoProd' },
   modalHomeContaProd : { displayName: 'Modal Toast Conta', mBox: 'modalHomeContaProd' },
   // modalHomeCreditoProd : { displayName: 'Toast - Home Credito', mBox: 'Modal Toast - Home Credito' },
 };
