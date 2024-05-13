@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import icons from '../../../assets';
 import IconButton from '../IconButton';
 import Modal from '../../Modal';
-
 import { IconsContainer, AudienceModal } from './style';
 
 
-export default function CardButtons(props) {
+export default function CircularButtons(props) {
   const { details, audienceDetails, experienceName } = props.offer;
   const { content } = details;
 
@@ -22,7 +21,8 @@ export default function CardButtons(props) {
     return regex.test(link);
   };
 
-  const isQA = [2437296, 2143318, 2565598, 2544056, 2567469, 2571312].includes(audienceDetails.id);
+  // 2437296, 2143318
+  const isQA = [2437296, 2143318, 2565598, 2544056, 2567469, 2571312, 2583493, 2582484].includes(audienceDetails.id);
 
   const buttonProps = {
     qa :{
@@ -94,13 +94,11 @@ export default function CardButtons(props) {
           buttonProps={buttonProps.audience}
           onClick={() => handleModalContent({experienceName, audienceDetails, offerId: details.id, ...content.payload}, 'audience')}
         />
-        {isExternalOrDeepLink(deepLink) ? (
-          <a href={deepLink} target="_blank" rel="noreferrer">
-            <IconButton buttonProps={buttonProps.externalLink} isDisabled={!deepLink} />
-          </a>
-        ) : (
-          <IconButton buttonProps={buttonProps.deepLink} isDisabled />
-        )}
+        {isExternalOrDeepLink(deepLink) ? 
+          (<a href={deepLink} target="_blank" rel="noreferrer"><IconButton buttonProps={buttonProps.externalLink} isDisabled={!deepLink} /></a>) 
+          :
+          (<IconButton buttonProps={buttonProps.deepLink} isDisabled />)
+        }
       </IconsContainer>
       
       { 
@@ -124,7 +122,7 @@ export default function CardButtons(props) {
             <hr/>
             <p><strong>Offer Id: </strong>{modalContent.offerId}</p>
             <p><strong>Offer: </strong>{modalContent.nomeOferta || modalContent.name}</p>
-            {props.priority && (<p><strong>Priority: </strong>{props.priority}</p>)}
+            {!!props.priority && <p><strong>Priority: </strong>{props.priority}</p>}
           </AudienceModal>
         </Modal>
       }
@@ -132,7 +130,7 @@ export default function CardButtons(props) {
   );
 }
 
-CardButtons.propTypes = {
+CircularButtons.propTypes = {
   offer: PropTypes.object,
   priority: PropTypes.number,
 }.isRequired;
