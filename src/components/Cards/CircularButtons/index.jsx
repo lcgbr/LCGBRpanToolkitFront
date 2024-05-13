@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import icons from '../../../assets';
 import IconButton from '../IconButton';
 import Modal from '../../Modal';
-
 import { IconsContainer, AudienceModal } from './style';
 
 
@@ -22,7 +21,8 @@ export default function CircularButtons(props) {
     return regex.test(link);
   };
 
-  const isQA = [2437296, 2143318, 2565598, 2544056, 2567469, 2571312].includes(audienceDetails.id);
+  // 2437296, 2143318
+  const isQA = [2437296, 2143318, 2565598, 2544056, 2567469, 2571312, 2583493, 2582484].includes(audienceDetails.id);
 
   const buttonProps = {
     qa :{

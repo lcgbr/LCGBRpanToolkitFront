@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Container } from './style';
+
 
 export default function IconButton(props) {
   const { buttonProps, isDisabled, onClick } = props;

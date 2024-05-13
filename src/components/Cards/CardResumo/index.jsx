@@ -1,15 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image } from './style';
+import { Image, Container } from './style';
+
 
 export default function CardResumo(props) {
-  const { payload } = props.offer.details.content;
+  const { imagemURL, nomeOferta, botao } = props.payload;
 
   return (
-    <Image src={payload.imagemURL} alt="Descrição da imagem" />
+    imagemURL
+      ? (<Image src={imagemURL} alt={imagemURL} />)
+      : (
+        <Container>
+          <h1>{nomeOferta}</h1>
+          <div>{botao}</div>
+        </Container>
+      )
   );
 }
 
 CardResumo.propTypes = {
-  offer: PropTypes.object,
+  payload: PropTypes.object,
 }.isRequired;

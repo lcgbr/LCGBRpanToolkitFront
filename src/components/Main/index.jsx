@@ -4,7 +4,6 @@ import Card from '../Cards/Card';
 import CircularButtons from '../Cards/CircularButtons';
 import ActivityTitle from '../ActivityTitle';
 import Loading from '../Loading';
-
 import {
   Error, 
   MainContainer, 
@@ -28,8 +27,8 @@ export default function Main(props) {
 
               {activity.options.map((offer, idx) => 
                 <ActivityContent key={idx}>
-                  <Card offer={offer} priority={activity.priority}/>
-                  <CircularButtons offer={offer} priority={activity.priority}/>
+                  <Card offer={offer} activity={{name: activity.name, priority: activity.priority}} />
+                  <CircularButtons offer={offer} priority={activity.priority} />
                 </ActivityContent>
               )}
             </ActivityContainer>

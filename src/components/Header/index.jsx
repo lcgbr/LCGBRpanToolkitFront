@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SPACES_ARRAY } from '../../utils/spaces';
 import logoLCG from '../../assets/lcgbr-white-logo.webp';
-
 import { HeaderContainer, HeaderTitle, HeaderButton } from './style';
 
 
