@@ -4,6 +4,7 @@ import bell from './bell-icon.png';
 import audience from './audience-icon.png';
 import deepLink from './deep-link-icon.png';
 import externalLink from './external-link-icon.png';
+import rightArrow from './right-arrow-icon.png';
 
 export default {
   QA,
@@ -11,5 +12,6 @@ export default {
   bell, 
   audience, 
   deepLink, 
-  externalLink, 
+  externalLink,
+  rightArrow,
 };
