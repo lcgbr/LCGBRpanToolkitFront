@@ -59,6 +59,7 @@ Além disso, possui recursos para selecionar um espaço específico, o que permi
 </details>
 
 ## Demonstração
+https://github.com/marcelo-mls/banco-pan-qa-target-frontend/assets/102492818/90877048-bfec-4c2d-b4f7-7c02f8331189
 
 ## Requisitos Técnicos
 
