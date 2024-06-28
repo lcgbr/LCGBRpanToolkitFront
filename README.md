@@ -14,14 +14,51 @@ As principais funcionalidades incluem a renderização das ofertas e atividades,
 
 Além disso, possui recursos para selecionar um espaço específico, o que permite ao usuário visualizar não apenas a atividade live desse espaço, mas também todas as atividades agendadas associadas a ele. Isso simplifica significativamente o trabalho operacional de QA realizado.
 
-## Principais Benefícios
-- **Facilidade de Gerenciamento:** Facilita a identificação das ofertas que estão em processo de QA, atraves de um ícone que sinaliza se uma oferta está em fase de validação.
-- **Visualização de Agendamentos:** Exibe de forma visual e ordenada todas as atividades agendadas, além de informar quantas ofertas estão cadastradas em cada agendamento.
-- **Priorização de Ofertas:** Organiza e exibe as ofertas de acordo com a prioridade definida.
-- **Validação do Conteúdo das Ofertas:** Permite visualizar e validar o conteúdo do JSON atribuído às ofertas.
-- **Validação Precisa de Audiências:** Permite verificar se a audiência foi corretamente atribuída às ofertas, garantindo a precisão das campanhas.
-- **Validação de Links:** Oferece a funcionalidade de testar e navegar por links externos associados às ofertas. Também diferencia visualmente deep links de links externos.
-- **Interface Dinâmica:** Visualize as ofertas em seus diversos formatos e estilos, com uma aparência idêntica aos banners exibidos aos clientes.
+## Principais Ganhos
+
+<details>
+  <summary><strong>Visualização de Agendamentos</strong></summary>
+  Exibe de forma visual e ordenada todas as atividades agendadas, além de informar quantas ofertas estão cadastradas em cada agendamento.
+  <img height="400px" src="./public/toolkit_agendamento.png">
+</details>
+
+<details>
+  <summary><strong>Identificação de ofertas em QA</strong></summary>
+  Fácil identificação das ofertas que estão em processo de QA, atraves de um ícone que sinaliza se uma oferta está em fase de validação.
+  <img height="400px" src="./public/toolkit_qa_button.png">
+</details>
+
+<details>
+  <summary><strong>Priorização de Ofertas</strong></summary>
+  Organiza e exibe as ofertas de acordo com a prioridade definida.
+  <img height="400px" src="./public/toolkit_prioridade.png">
+</details>
+
+<details>
+  <summary><strong>Validação do Conteúdo das Ofertas</strong></summary>
+  Permite visualizar e validar o conteúdo do JSON atribuído às ofertas.
+  <img height="400px" src="./public/toolkit_json_button.png">
+</details>
+
+<details>
+  <summary><strong>Validação Precisa de Audiências</strong></summary>
+  Permite verificar se a audiência foi corretamente atribuída às ofertas, garantindo a precisão das campanhas.
+  <img height="400px" src="./public/toolkit_audience_button.png">
+</details>
+
+<details>
+  <summary><strong>Validação de Links</strong></summary>
+  Oferece a funcionalidade de testar e navegar por links externos associados às ofertas. Também diferencia visualmente deep links de links externos.
+  <img height="400px" src="./public/toolkit_links.png">
+</details>
+
+<details>
+  <summary><strong>Interface Dinâmica</strong></summary>
+  Visualize as ofertas em seus diversos formatos e estilos, com uma aparência idêntica aos banners exibidos aos clientes.
+  <img height="400px" src="./public/toolkit_estilo.png">
+</details>
+
+## Demonstração
 
 ## Requisitos Técnicos
 
