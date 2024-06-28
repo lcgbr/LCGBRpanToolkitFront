@@ -14,11 +14,11 @@ As principais funcionalidades incluem a renderização das ofertas e atividades,
 
 Além disso, possui recursos para selecionar um espaço específico, o que permite ao usuário visualizar não apenas a atividade live desse espaço, mas também todas as atividades agendadas associadas a ele. Isso simplifica significativamente o trabalho operacional de QA realizado.
 
-## Ganhos operacionais
-- **Validar Audiência Atribuída para Oferta:** Permite verificar se a audiência foi corretamente atribuída às ofertas, garantindo a precisão das campanhas.
-- **Visualização de Agendamentos:** Exibe de forma visual todas as atividades agendadas, facilitando o acompanhamento e gerenciamento.
-- **Teste de Links Externos:** Oferece uma ferramenta para testar a funcionalidade de links externos associados às ofertas.
-- **Priorização de Ofertas:** Organiza as ofertas de acordo com a prioridade definida, ajudando na tomada de decisões estratégicas.
+## Ganhos Operacionais
+- **Validar audiência atribuída para oferta:** Permite verificar se a audiência foi corretamente atribuída às ofertas, garantindo a precisão das campanhas.
+- **Visualização de agendamentos:** Exibe de forma visual todas as atividades agendadas, facilitando o acompanhamento e gerenciamento.
+- **Teste de links externos:** Oferece uma ferramenta para testar a funcionalidade de links externos associados às ofertas.
+- **Priorização de ofertas:** Organiza as ofertas de acordo com a prioridade definida, ajudando na tomada de decisões estratégicas.
 
 ## Requisitos Técnicos
 
