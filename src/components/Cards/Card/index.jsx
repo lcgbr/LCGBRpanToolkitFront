@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SPACES_OBJECT } from '../../../utils/spaces';
 import CardCentralAvisos from '../CardCentralAvisos';
 import CardGeneric from '../CardGeneric';
 import CardResumo from '../CardResumo';
@@ -18,13 +19,27 @@ export default function Card(props) {
   const setSpaceTemplate = () => {
     const { name } = activity;
 
-    if(name.includes('dashResumo') || name.includes('homeResumo')) {
+    const isCardResumo = [
+      SPACES_OBJECT.dashResumo1.mBox,
+      SPACES_OBJECT.dashResumo2.mBox,
+      SPACES_OBJECT.dashResumo3.mBox,
+      SPACES_OBJECT.homeResumo1.mBox,
+      SPACES_OBJECT.homeResumo2.mBox,
+      SPACES_OBJECT.homeResumo3.mBox,
+    ].some((space) => name.includes(space));
+    
+    const isCardToast = [
+      SPACES_OBJECT.modalHomeCartaoProd.mBox,
+      SPACES_OBJECT.modalHomeContaProd.mBox,
+    ].some((space) => name.includes(space));
+    
+    if(isCardResumo) {
       return (<CardResumo payload={payload} />);
 
-    } else if(name.includes('telaCentralAvisos')) {
+    } else if(name.includes(SPACES_OBJECT.telaCentralAvisos.mBox)) {
       return (<CardCentralAvisos payload={payload} />);
 
-    } else if(name.includes('modalHomeContaProd') || name.includes('modalHomeCartaoProd')) {
+    } else if(isCardToast) {
       return (<CardToast payload={payload} />);
 
     } else {
