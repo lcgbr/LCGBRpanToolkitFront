@@ -2,7 +2,7 @@
 
 # LCGBR TOOLKIT
 ## Descrição
-Este projeto faz parte do **Toolkit** da [Lima Consulting Group](https://www.limaconsulting.com/), que tem o intuito de oferecer uma caixa de ferramentas completa para seus clientes, proporcionando diversas soluções em um único ambiente. A primeira funcionalidade disponibilizada neste toolkit é o **"Validador de experiências do Adobe Target"**, que visa aprimorar o processo de Quality Assurance dos clientes que utilizam o Target.
+Este projeto faz parte do **Toolkit** da [Lima Consulting Group](https://www.limaconsulting.com/), que tem o intuito de oferecer uma caixa de ferramentas completa para seus clientes, proporcionando diversas soluções em um único ambiente. A primeira funcionalidade disponibilizada neste toolkit é o **"Validador de experiências do Adobe Target"**.
 
 ## Objetivo
 O **Validador de experiências do Adobe Target** é uma aplicação web que tem o objetivo de facilitar as etapas de QA, fornecendo uma ferramenta intuitiva que permita às equipes visualizar, validar e testar de maneira eficiente e visual as experiências criadas no Target.
@@ -14,10 +14,7 @@ As principais funcionalidades incluem a renderização das ofertas e atividades,
 
 Além disso, possui recursos para selecionar um espaço específico, o que permite ao usuário visualizar não apenas a atividade live desse espaço, mas também todas as atividades agendadas associadas a ele. Isso simplifica significativamente o trabalho operacional de QA realizado.
 
-Em resumo, este projeto oferece uma ferramenta que torna mais fácil e eficiente o processo de avaliação e validação das experiências criadas no Adobe Target.
-
-## Ganhos Operacionais
-- **Facilitar Processo de QA:** A aplicação torna mais simples a revisão e validação das atividades e ofertas, agilizando o processo de QA.
+## Ganhos operacionais
 - **Validar Audiência Atribuída para Oferta:** Permite verificar se a audiência foi corretamente atribuída às ofertas, garantindo a precisão das campanhas.
 - **Visualização de Agendamentos:** Exibe de forma visual todas as atividades agendadas, facilitando o acompanhamento e gerenciamento.
 - **Teste de Links Externos:** Oferece uma ferramenta para testar a funcionalidade de links externos associados às ofertas.
