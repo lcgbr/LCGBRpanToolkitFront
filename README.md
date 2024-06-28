@@ -1,3 +1,10 @@
+<img align="center" src="./public/toolkit_readme_capa.png" alt="Blue background with a demonstration of the web view in a notebook and a desktop computer">
+
+# LCGBR Toolkit
+Aplicação Web para validar experiências do Adobe Target
+
+<br />
+
 # Frontend
 
 ## Descrição
