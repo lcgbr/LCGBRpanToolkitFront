@@ -97,34 +97,66 @@ Essas tecnologias e bibliotecas foram escolhidas para oferecer uma base sólida 
 2. Instale as dependências, com `npm i`
 4. Informe as variáveis de ambiente
 3. Inicie o servidor com `npm run dev`
->Aviso: O backend estará disponível na porta **3001**. Certifique-se de acessar esta porta para visualizar a aplicação.
+>Aviso: Certifique-se de acessar corretamente a porta informada nas variáveis de ambiente para testar a aplicação.
 
 ### Variáveis de Ambiente
-Importante lembrar de criar um arquivo `.env` e preencher com as variáveis de ambiente conforme indicado no arquivo `.env.example`
+As variáveis de ambiente são configuradas para garantir a segurança da aplicação. Elas armazenam informações sensíveis ou configurações específicas que não devem ser expostas diretamente no código-fonte.
+
+Abaixo estão as principais variáveis de ambiente utilizadas neste projeto:
+
+- API_PORT: Porta na qual o servidor da API estará disponível durante o desenvolvimento.
+- TENANT_ID: Identificador do tenant do cliente.
+- API_KEY: Chave de API para autenticação nas APIs da Adobe.
+- HEADER_ACCEPT_V2: Tipo de conteúdo aceito para API v2 do Adobe Target.
+- HEADER_ACCEPT_V3: Tipo de conteúdo aceito para API v3 do Adobe Target.
+- CLIENT_ID: ID do cliente para autenticação na Adobe.
+- CLIENT_SECRET: Segredo do cliente para autenticação na Adobe.
+- CLIENT_SCOPE: Escopos de permissão necessários para acessar recursos específicos.
+
+Importante lembrar de criar um arquivo `.env` e preencher com as variáveis de ambiente conforme modelo do arquivo `.env.example`
+
+```env
+API_PORT=3001
+TENANT_ID=
+API_KEY=
+HEADER_ACCEPT_V2=application/vnd.adobe.target.v2+json
+HEADER_ACCEPT_V3=application/vnd.adobe.target.v3+json
+CLIENT_ID=
+CLIENT_SECRET=
+CLIENT_SCOPE=
+```
+
+#### Documentação
+Para mais detalhes sobre como configurar essas variáveis e utilizá-las corretamente, consulte a documentação relacionada:
+- [Authenticate and access Experience Platform APIs](https://experienceleague.adobe.com/en/docs/experience-platform/landing/platform-apis/api-authentication#authentication-for-each-session)
+- [Configure authentication for Adobe Target APIs](https://experienceleague.adobe.com/en/docs/target-dev/developer/api/configure-authentication)
+- [Adobe Target Admin and Reporting APIs](https://developer.adobe.com/target/administer/admin-api/#tag/Offers)
 
 ### Rotas
 > Todas as rotas retornam JSON.
 > Em caso de sucesso, o status de resposta é 200 (OK).
 > Lembre-se de informar os parâmetros adequados
 
-### Atividades
-- `GET`: /activities/
+- #### Atividades
+`GET`: /activities/
 >Retorna uma lista de todas as atividades.
-- `GET`: /activities/:activityId
+
+`GET`: /activities/:activityId
 >Retorna os detalhes de uma atividade específica com base no seu ID.
 
-### Audiências
-- `GET`: /audiences/
+- #### Audiências
+`GET`: /audiences/
 >Retorna uma lista de todas as audiências.
-- `GET`: /audiences/:audienceId
+
+`GET`: /audiences/:audienceId
 >Retorna os detalhes de uma audiência específica com base no seu ID.
 
-### Ofertas
-- `GET`: /offers/:offerId
+- #### Ofertas
+`GET`: /offers/:offerId
 >Retorna os detalhes de uma oferta específica com base no seu ID.
 
-### Espaços
-- `GET`: /space/clean/:spaceName
+- #### Espaços
+`GET`: /space/clean/:spaceName
 >Retorna todo o conteúdo de um espaço, incluindo atividades, ofertas e audiências.
->
+
 </details>
