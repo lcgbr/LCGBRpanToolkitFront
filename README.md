@@ -5,7 +5,7 @@
 Este projeto faz parte do **Toolkit** da [Lima Consulting Group](https://www.limaconsulting.com/), que tem o intuito de oferecer uma caixa de ferramentas completa para seus clientes, proporcionando diversas soluções em um único ambiente. A primeira funcionalidade disponibilizada neste toolkit é o **"Validador de experiências do Adobe Target"**.
 
 ## Objetivo
-O **Validador de experiências do Adobe Target** é uma aplicação web que tem o objetivo de facilitar as etapas de QA, fornecendo uma ferramenta intuitiva que permita às equipes visualizar, validar e testar de maneira eficiente e visual as experiências criadas no Target.
+O **Validador de experiências do Adobe Target** é uma aplicação web que tem o objetivo de facilitar as etapas de QA, fornecendo uma ferramenta intuitiva que permita visualizar, testar e validar de maneira eficiente e visual as experiências criadas no Target.
 
 ## Funcionamento
 A aplicação apresenta uma interface amigável em que os usuários podem acessar os dados disponibilizados pela Adobe via API do Target. 
