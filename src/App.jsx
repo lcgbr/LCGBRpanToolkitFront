@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchSpaceContent } from '../src/utils/api';
+import { categorizeActivities } from './utils/categorizeActivities';
 import Header from './components/Header';
 import Main from './components/Main';
 import GlobalStyles from './styles/GlobalStyles';
@@ -23,7 +24,7 @@ function App() {
       setSpaceData([]);
     } else {
       setErrorMessage('');
-      setSpaceData(response);
+      setSpaceData(categorizeActivities(response));
     }
     setIsLoading(false);
     // window.dataLayer = window.dataLayer || [];
