@@ -5,7 +5,7 @@ import { Container, X, Content } from './style';
 
 
 export default function CardToast(props) {
-  const { title, description, button } = props.payload;
+  const { title, description, button } = props.payload.offerDetails.content.payload;
 
   return (
     <Container >

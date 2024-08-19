@@ -1,4 +1,5 @@
 import QA from './qa-icon.png';
+import whiteQA from './qa-icon-white.png';
 import JSON from './json-icon.png';
 import bell from './bell-icon.png';
 import audience from './audience-icon.png';
@@ -14,4 +15,5 @@ export default {
   deepLink, 
   externalLink,
   rightArrow,
+  whiteQA,
 };

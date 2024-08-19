@@ -4,11 +4,12 @@ import { Image, Container } from './style';
 
 
 export default function CardResumo(props) {
-  const { imagemURL, nomeOferta, botao } = props.payload;
+  const { imagemURL, nomeOferta, botao } = props.payload.offerDetails.content.payload;
+  const lighterImageUrl = imagemURL.split('?')[0];
 
   return (
     imagemURL
-      ? (<Image src={imagemURL} alt={imagemURL} />)
+      ? (<Image src={lighterImageUrl} alt={imagemURL} />)
       : (
         <Container>
           <h1>{nomeOferta}</h1>

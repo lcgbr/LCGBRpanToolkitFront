@@ -9,7 +9,7 @@ export const Container = styled.div`
   width: 265px;
   border-radius: 8px;
   position: relative;
-  ${({hasError}) => hasError && 'border: 2px solid #E84855;'}
+  ${({ $hasError }) => $hasError && 'border: 2px solid #E84855;'}
 `;
 
 export const X = styled.div`

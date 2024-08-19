@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { SPACES_OBJECT } from './utils/spaces';
 import { fetchSpaceContent } from '../src/utils/api';
 import { categorizeActivities } from './utils/categorizeActivities';
 import Header from './components/Header';
@@ -6,7 +7,7 @@ import Main from './components/Main';
 import GlobalStyles from './styles/GlobalStyles';
 
 function App() {
-  const [selectedSpace, setSelectedSpace] = useState('dashResumo1');
+  const [selectedSpace, setSelectedSpace] = useState(SPACES_OBJECT.dashResumo1.mBox);
   const [errorMessage, setErrorMessage] = useState('');
   const [spaceData, setSpaceData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +26,7 @@ function App() {
     } else {
       setErrorMessage('');
       setSpaceData(categorizeActivities(response));
+      // setSpaceData(response);
     }
     setIsLoading(false);
     // window.dataLayer = window.dataLayer || [];

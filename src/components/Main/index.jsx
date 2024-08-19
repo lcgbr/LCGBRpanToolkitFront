@@ -17,7 +17,7 @@ export default function Main(props) {
   const { errorMessage, isLoading, spaceData } = props;
 
   return (
-    <MainContainer justify={spaceData.length <= 3}>
+    <MainContainer $justify={spaceData.length <= 3 ? 'center' : 'flex-start'}>
       {errorMessage && <Error>Ops! Algo deu errado :(<br/>{errorMessage}</Error>}
       {isLoading ? <Loading /> :
         (<ActivityGroup>
@@ -27,8 +27,8 @@ export default function Main(props) {
 
               {activity.options.map((offer, idx) => 
                 <ActivityContent key={idx}>
-                  <Card offer={offer} activity={{name: activity.name, priority: activity.priority}} />
-                  <CircularButtons offer={offer} priority={activity.priority} />
+                  <Card offer={offer} activity={activity} />
+                  <CircularButtons offer={offer} />
                 </ActivityContent>
               )}
             </ActivityContainer>

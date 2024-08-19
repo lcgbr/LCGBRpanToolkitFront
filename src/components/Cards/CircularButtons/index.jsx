@@ -7,8 +7,8 @@ import { IconsContainer, AudienceModal } from './style';
 
 
 export default function CircularButtons(props) {
-  const { details, audienceDetails, experienceName } = props.offer;
-  const { content } = details;
+  const { offerDetails, audienceDetails, experience, ordination, type, scheduling } = props.offer;
+  const { content } = offerDetails;
 
   const [isOfferModalVisible, setOfferModalVisible] = useState(false);
   const [isAudienceModalVisible, setAudienceModalVisible] = useState(false);
@@ -21,8 +21,29 @@ export default function CircularButtons(props) {
     return regex.test(link);
   };
 
-  // 2437296, 2143318
-  const isQA = [2437296, 2143318, 2565598, 2544056, 2567469, 2571312, 2583493, 2582484].includes(audienceDetails.id);
+  const formatScheduling = (dateISO) => {
+    if (dateISO === 'when deactivated' || dateISO === 'when activated') {
+      return dateISO.toUpperCase();
+    }
+
+    const date = new Date(dateISO);
+
+    const options = {
+      timeZone: 'America/Sao_Paulo',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+  
+    const formattedDate = date.toLocaleString('pt-BR', options);
+  
+    return formattedDate;
+  };
+
+  // 2437296, 2143318, 2616969
+  // const isQA = [2437296, 2143318, 2565598, 2544056, 2567469, 2571312, 2583493, 2582484, 2616969].includes(audienceDetails.id);
 
   const buttonProps = {
     qa :{
@@ -41,7 +62,7 @@ export default function CircularButtons(props) {
       src: icons.audience,
     },
     deepLink: {
-      title: 'Deep Link',
+      title: 'Deeplink não navegável',
       alt: 'Ícone com duas telas de smartphones, com uma seta que aponta para direita e sobrepõe ambas as telas',
       src: icons.deepLink,
     },
@@ -85,14 +106,14 @@ export default function CircularButtons(props) {
   return (
     <>
       <IconsContainer>
-        {isQA && <IconButton buttonProps={buttonProps.qa} isDisabled />}
+        {/* {isQA && <IconButton buttonProps={buttonProps.qa} isDisabled />} */}
         <IconButton
           buttonProps={buttonProps.json}
           onClick={() => handleModalContent({...content}, 'offer')}
         />
         <IconButton
           buttonProps={buttonProps.audience}
-          onClick={() => handleModalContent({experienceName, audienceDetails, offerId: details.id, ...content.payload}, 'audience')}
+          onClick={() => handleModalContent({experience, audienceDetails, offerId: offerDetails.id, ...content.payload}, 'audience')}
         />
         {isExternalOrDeepLink(deepLink) ? 
           (<a href={deepLink} target="_blank" rel="noreferrer"><IconButton buttonProps={buttonProps.externalLink} isDisabled={!deepLink} /></a>) 
@@ -118,11 +139,15 @@ export default function CircularButtons(props) {
               </a>
             </p>
             <p><strong>Audience: </strong>{modalContent.audienceDetails.name}</p>
-            <p><strong>Experience: </strong>{modalContent.experienceName}</p>
+            <p><strong>Experience: </strong>{modalContent.experience.name}</p>
+            <p><strong>Type: </strong>{type.activity.toUpperCase()}</p>
             <hr/>
             <p><strong>Offer Id: </strong>{modalContent.offerId}</p>
             <p><strong>Offer: </strong>{modalContent.nomeOferta || modalContent.name}</p>
-            {!!props.priority && <p><strong>Priority: </strong>{props.priority}</p>}
+            <p><strong>Priority: </strong>{ordination.priority}</p>
+            <hr/>
+            <p><strong>Starts at: </strong>{formatScheduling(scheduling.startsAt)}</p>
+            <p><strong>Ends at: </strong>{formatScheduling(scheduling.endsAt)}</p>
           </AudienceModal>
         </Modal>
       }
@@ -132,5 +157,4 @@ export default function CircularButtons(props) {
 
 CircularButtons.propTypes = {
   offer: PropTypes.object,
-  priority: PropTypes.number,
 }.isRequired;
