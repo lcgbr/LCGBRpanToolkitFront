@@ -3,114 +3,68 @@
 
 export function sortByPriorityAndStartDate(array) {
   return array.sort((a, b) => {
-    const startDateA = new Date(a.details.content.scheduling.startsAt || 0);
-    const startDateB = new Date(b.details.content.scheduling.startsAt || 0);
 
-    if (b.position === a.position) {
+    const startDateA = new Date(a.scheduling.startsAt || 0);
+    const startDateB = new Date(b.scheduling.startsAt || 0);
+
+    if (b.ordination.priority === a.ordination.priority) {
       return startDateA - startDateB;
     }
-    return b.position - a.position;
+    return b.ordination.priority - a.ordination.priority;
   });
 }
 
-export function categorizeActivities(activities) {
-
-  const hasPipe = activities[0].name.includes('|');
-  const hasParentheses = (activities[0].name.includes('(') || activities[0].name.includes(')'));
-
-  if (!hasPipe && hasParentheses) {
-    return activities;
-  }
-
-  const now = new Date();
-  const [mainTitle] = activities[0].name.split(' | ');
+export function categorizeActivities(groupedActivities) {
+  try {
+    const hasPipe = groupedActivities[0].name.includes('|');
+    const hasParentheses = (groupedActivities[0].name.includes('(') || groupedActivities[0].name.includes(')'));
   
-  const result = [];
-  const live = {
-    id: [],
-    name: `live | ${mainTitle}`,
-    state: 'approved',
-    priority: 0,
-    startsAt: '',
-    endsAt: '',
-    options: []
-  };
-  const scheduled = {
-    id: [],
-    name: `scheduled | ${mainTitle}`,
-    state: 'approved',
-    priority: 0,
-    startsAt: '',
-    endsAt: '',
-    options: []
-  };
-  const expired = {
-    id: [],
-    name: `expired | ${mainTitle}`,
-    state: 'approved',
-    priority: 0,
-    startsAt: '',
-    endsAt: '',
-    options: []
-  };
-
-  activities.forEach((activity) => {
-    const startsAt = activity.startsAt ? new Date(activity.startsAt) : null;
-    const endsAt = activity.endsAt ? new Date(activity.endsAt) : null;
-
-    const isStartDateMissing = !startsAt;
-    const isEndDateMissing = !endsAt;
-    const isNowAfterStart = startsAt && now >= startsAt;
-    const isNowBeforeEnd = endsAt && now <= endsAt;
-    const isNowAfterEnd = endsAt && now > endsAt;
-
-    const isLive = isStartDateMissing || (isNowAfterStart && (isEndDateMissing || isNowBeforeEnd));
-
-    if (isLive) {
-      live.id.push(activity.id);
-      const offers = activity.options.map((offer) => {
-        offer.position = activity.priority;
-        offer.details.content['scheduling'] = {};
-        offer.details.content.scheduling['startsAt'] = activity.startsAt;
-        offer.details.content.scheduling['endsAt'] = activity.endsAt;
-        return offer;
-      });
-      live.options.push(...offers);
-    } else if (isNowAfterEnd) {
-      expired.id.push(activity.id);
-      const offers = activity.options.map((offer) => {
-        offer.position = activity.priority;
-        offer.details.content['scheduling'] = {};
-        offer.details.content.scheduling['startsAt'] = activity.startsAt;
-        offer.details.content.scheduling['endsAt'] = activity.endsAt;
-        return offer;
-      });
-      expired.options.push(...offers);
-    } else {
-      scheduled.id.push(activity.id);
-      const offers = activity.options.map((offer) => {
-        offer.position = activity.priority;
-        offer.details.content['scheduling'] = {};
-        offer.details.content.scheduling['startsAt'] = activity.startsAt;
-        offer.details.content.scheduling['endsAt'] = activity.endsAt;
-        return offer;
-      });
-      scheduled.options.push(...offers);
+    if (!hasPipe && hasParentheses) {
+      return groupedActivities;
     }
-  });
-
-  sortByPriorityAndStartDate(live.options), 
-  result.push(live);
-
-  if (scheduled.options.length) {
-    sortByPriorityAndStartDate(scheduled.options),
-    result.push(scheduled);
+  
+    const [mainTitle] = groupedActivities[0].name.split(' | ');
+    const modularActivities = [];
+    const live = {
+      id: [],
+      name: `Experiências ativas | ${mainTitle}`,
+      state: 'approved',
+      priority: 0,
+      startsAt: '',
+      endsAt: '',
+      options: []
+    };
+    const scheduled = {
+      id: [],
+      name: `Experiências agendadas | ${mainTitle}`,
+      state: 'approved',
+      priority: 0,
+      startsAt: '',
+      endsAt: '',
+      options: []
+    };
+  
+    groupedActivities.forEach((activity) => {
+      if (activity.scheduling === 'live') {
+        live.id.push(activity.id);
+        live.options.push(...activity.options);
+      } else if (activity.scheduling === 'scheduled') {
+        scheduled.id.push(activity.id);
+        scheduled.options.push(...activity.options);
+      }
+    });
+  
+    sortByPriorityAndStartDate(live.options), 
+    modularActivities.push(live);
+  
+    if (scheduled.options.length) {
+      sortByPriorityAndStartDate(scheduled.options),
+      modularActivities.push(scheduled);
+    }
+  
+    return modularActivities;
+  } catch (error) {
+    console.error(error);
+    return {status: 500, message: 'Parece ser um erro interno do servidor. Tente recarregar a página.'};
   }
-
-  if (expired.options.length) {
-    sortByPriorityAndStartDate(expired.options);
-    result.push(expired);
-  }
-
-  return result;
 }

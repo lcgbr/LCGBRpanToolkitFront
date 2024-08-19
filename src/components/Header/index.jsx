@@ -15,9 +15,9 @@ export default function Header(props) {
           <img src={logoLCG} />
         </a>
         <HeaderTitle>
-          <h1>LCGBR Toolkit
+          <h1>TOOLKIT LCG
             <br/>
-            <span>QA - Activities Adobe Target</span>
+            <span>Target Experience Validator</span>
           </h1>
         </HeaderTitle>
         <HeaderButton>
@@ -25,18 +25,6 @@ export default function Header(props) {
             {SPACES_ARRAY.map((space, index) => (
               <option key={index} value={space.mBox}>{space.displayName}</option>
             ))}
-            {/* <option value="dashResumo1">Dash Resumo 1</option>
-            <option value="dashResumo2">Dash Resumo 2</option>
-            <option value="dashResumo3">Dash Resumo 3</option>
-            <option value="telaCentralAvisos">Central de Avisos</option>
-            <option value="homeResumo1">Home Resumo 1</option>
-            <option value="homeResumo2">Home Resumo 2</option>
-            <option value="homeResumo3">Home Resumo 3</option>
-            <option value="DashCartão">Dash Cartão</option>
-            <option value="DashConta">Dash Conta</option>
-            <option value="DashCredito">Dash Crédito</option>
-            <option value="Modal Toast - Home Cartao">Modal Toast Cartão</option>
-            <option value="modalHomeContaProd">Modal Toast Conta</option> */}
           </select>
         </HeaderButton>
       </HeaderContainer>

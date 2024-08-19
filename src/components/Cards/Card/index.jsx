@@ -5,16 +5,17 @@ import CardCentralAvisos from '../CardCentralAvisos';
 import CardGeneric from '../CardGeneric';
 import CardResumo from '../CardResumo';
 import CardToast from '../CardToast';
-import { CardContent, CardTitles } from './style';
+import icons from '../../../assets';
+import { CardContent, CardTitles, TypeContainer, QAContainer } from './style';
 
 
 export default function Card(props) {
   const { offer, activity } = props;
-  const { audienceDetails, position } = offer;
-  const { payload } = offer.details.content;
+  const { audienceDetails, ordination } = offer;
+  const { payload } = offer.offerDetails.content;
 
   const offerName = payload.nomeOferta || payload.name;
-  const positionTextInfo = activity.priority ? `Posição: ${position}\nPrioridade: ${activity.priority}` : 'Posição';
+  const ordinationTextInfo = `Posição: ${ordination.position}\nPrioridade: ${ordination.priority}`;
 
   const setSpaceTemplate = () => {
     const { name } = activity;
@@ -34,17 +35,31 @@ export default function Card(props) {
     ].some((space) => name.includes(space));
     
     if(isCardResumo) {
-      return (<CardResumo payload={payload} />);
+      return (<CardResumo payload={offer} />);
 
     } else if(name.includes(SPACES_OBJECT.telaCentralAvisos.mBox)) {
-      return (<CardCentralAvisos payload={payload} />);
+      return (<CardCentralAvisos payload={offer} />);
 
     } else if(isCardToast) {
-      return (<CardToast payload={payload} />);
+      return (<CardToast payload={offer} />);
 
     } else {
-      return (<CardGeneric payload={payload} />);
+      return (<CardGeneric payload={offer} />);
     }
+  };
+
+  const setBackgroundColorForType = (type) => {
+    if(type === 'xt') return '#963484';
+    if(type === 'ab') return '#3A7D44';
+    return '#1a1a1a';
+  };
+
+  const qualityAssurance = {
+    isQA: [2437296, 2143318, 2565598, 2544056, 2567469, 2571312, 2583493, 2582484, 2616969].includes(audienceDetails.id),
+    title: 'Oferta em validação ou testes',
+    alt: 'Ícone de um balão Erlenmeyer, um recipiente utilizado em laboratórios químicos',
+    blackIconSrc: icons.QA,
+    whiteIconSrc: icons.whiteQA,
   };
 
   return (
@@ -54,7 +69,15 @@ export default function Card(props) {
         <p title={offerName}><strong>Oferta: </strong>{offerName}</p>
       </CardTitles>
       <CardContent>
-        <span title={positionTextInfo}>{position}</span>
+        <div>
+          <TypeContainer title={offer.experience.name} $typeColor={setBackgroundColorForType(offer.type.activity)}>
+            {offer.type.activity.toUpperCase()}
+          </TypeContainer>
+          <span title={ordinationTextInfo}>{ordination.priority}</span>
+          {qualityAssurance.isQA && <QAContainer title={qualityAssurance.title}>
+            <img src={qualityAssurance.whiteIconSrc} alt={qualityAssurance.alt}/>
+          </QAContainer>}
+        </div>
         {setSpaceTemplate()}
       </CardContent>
     </>

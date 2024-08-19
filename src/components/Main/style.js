@@ -7,7 +7,7 @@ export const MainContainer = styled.main`
   min-width: 100vw;
   margin-top: 80px;
   padding: 0 64px;
-  justify-content: ${(props) => props.justify ? 'center' : 'flex-start'};
+  justify-content: ${(props) => props.$justify};
 `;
 
 export const Error = styled.p`

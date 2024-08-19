@@ -11,15 +11,16 @@ export default function CardCentralAvisos(props) {
     subtitulo,
     descricao,
     botao,
-  } = props.payload;
+  } = props.payload.offerDetails.content.payload;
 
   const hasError = !(imagemURL && textoAcessibilidade && titulo && subtitulo && descricao && botao);
+  const lighterImageUrl = imagemURL.split('?')[0];
 
   return (
-    <Container hasError={hasError}>
+    <Container $hasError={hasError}>
       <X>x</X>
       <Content>
-        <img src={imagemURL} alt={textoAcessibilidade} />
+        <img src={lighterImageUrl} alt={textoAcessibilidade} />
         <section>
           <h1>{titulo}</h1>
           <h2>{subtitulo}</h2>

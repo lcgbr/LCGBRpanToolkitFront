@@ -45,6 +45,7 @@ export const Container = styled.div`
   div {
     width: 233px;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     position: absolute;
