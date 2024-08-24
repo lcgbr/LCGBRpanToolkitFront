@@ -2,7 +2,7 @@ export const SPACES_OBJECT = {
   dashResumo1 : { displayName: 'Dash Resumo 1', mBox: 'dashResumo1Prod' },
   dashResumo2 : { displayName: 'Dash Resumo 2', mBox: 'dashResumo2Prod' },
   dashResumo3 : { displayName: 'Dash Resumo 3', mBox: 'dashResumo3Prod' },
-  // travaTelas : { displayName: 'Novo Trava Telas', mBox: 'travaTelasHomeProd' },
+  travaTelas : { displayName: 'Novo Trava Telas', mBox: 'travaTelasHomeProd' },
   telaCentralAvisos : { displayName: 'Central de Avisos', mBox: 'telaCentralAvisosProd' },
   homeResumo1 : { displayName: 'Home Resumo 1', mBox: 'homeResumo1Prod' },
   homeResumo2 : { displayName: 'Home Resumo 2', mBox: 'homeResumo2Prod' },

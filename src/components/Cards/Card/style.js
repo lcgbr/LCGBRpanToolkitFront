@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const CardTitles = styled.div`
   font-size: 12px;
   text-align: left;
-  width: 262px;
+  min-width: 216px;
+  max-width: 262px;
+  /* width: 262px; */
   align-self: flex-end;
 
   p {
@@ -20,6 +22,7 @@ export const CardContent = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
+  gap: 9px;
 
   & div {
     display: flex;

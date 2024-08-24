@@ -25,7 +25,7 @@ export const ActivityGroup = styled.div`
 `;
 
 export const ActivityContainer = styled.section`
-  width: 300px;
+  /* width: 300px; */
   overflow: hidden;
 `;
 
