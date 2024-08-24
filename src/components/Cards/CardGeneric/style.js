@@ -43,26 +43,26 @@ export const Container = styled.div`
   }
 
   div {
-    width: 233px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    bottom: 8px;
-
-    P {
+    p {
+      display: flex;
+      align-items: center;
       font-size: 12px;
       color: #ffffff;
       font-weight: 500;
+      height: 28px;
       width: 190px;
       margin: 0;
+      position: absolute;
+      bottom: 8px;
     }
 
     img {
       height: 28px;
       width: 28px;
       margin-bottom: 0;
+      position: absolute;
+      bottom: 8px;
+      right: 16px;
     }
   }
 `;
