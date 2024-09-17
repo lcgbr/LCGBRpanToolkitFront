@@ -60,8 +60,11 @@ export default function Card(props) {
     return '#1a1a1a';
   };
 
+  const isQA = (audienceDetails.name.toLowerCase().includes('target qa')) ||
+    ([2437296, 2143318, 2565598, 2544056, 2567469, 2571312, 2583493, 2582484, 2616969].includes(audienceDetails.id));
+
   const qualityAssurance = {
-    isQA: [2437296, 2143318, 2565598, 2544056, 2567469, 2571312, 2583493, 2582484, 2616969].includes(audienceDetails.id),
+    isQA,
     title: 'Oferta em validação ou testes',
     alt: 'Ícone de um balão Erlenmeyer, um recipiente utilizado em laboratórios químicos',
     blackIconSrc: icons.QA,
