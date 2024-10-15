@@ -7,7 +7,9 @@ import Main from './components/Main';
 import GlobalStyles from './styles/GlobalStyles';
 
 function App() {
-  const [selectedSpace, setSelectedSpace] = useState(SPACES_OBJECT.dashResumo1.mBox);
+  const mBox = sessionStorage.getItem('mBox') || SPACES_OBJECT.dashResumo1.mBox;
+
+  const [selectedSpace, setSelectedSpace] = useState(mBox);
   const [errorMessage, setErrorMessage] = useState('');
   const [spaceData, setSpaceData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

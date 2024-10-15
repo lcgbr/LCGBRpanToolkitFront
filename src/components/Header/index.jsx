@@ -8,6 +8,11 @@ import { HeaderContainer, HeaderTitle, HeaderButton } from './style';
 export default function Header(props) {
   const { selectedSpace, setSelectedSpace } = props;
 
+  const handleSpace = (value) => {
+    sessionStorage.setItem('mBox', value);
+    setSelectedSpace(value);
+  };
+
   return (
     <>
       <HeaderContainer>
@@ -21,7 +26,7 @@ export default function Header(props) {
           </h1>
         </HeaderTitle>
         <HeaderButton>
-          <select value={selectedSpace} onChange={(e) => setSelectedSpace(e.target.value)}>
+          <select value={selectedSpace} onChange={(e) => handleSpace(e.target.value)}>
             {SPACES_ARRAY.map((space, index) => (
               <option key={index} value={space.mBox}>{space.displayName}</option>
             ))}
