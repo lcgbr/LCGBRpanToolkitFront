@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SPACES_OBJECT } from '../../../utils/spaces';
-import CardCentralAvisos from '../CardCentralAvisos';
+// import CardCentralAvisos from '../CardCentralAvisos';
 import CardTravaTelas from '../CardTravaTelas';
 import CardGeneric from '../CardGeneric';
 import CardResumo from '../CardResumo';
@@ -40,8 +40,8 @@ export default function Card(props) {
     if(isCardResumo) {
       return (<CardResumo payload={offer} />);
 
-    } else if(name.includes(SPACES_OBJECT.telaCentralAvisos.mBox)) {
-      return (<CardCentralAvisos payload={offer} />);
+      // } else if(name.includes(SPACES_OBJECT.telaCentralAvisos.mBox)) {
+      //   return (<CardCentralAvisos payload={offer} />);
 
     } else if(name.includes(SPACES_OBJECT.travaTelas.mBox)) {
       return (<CardTravaTelas payload={offer} />);

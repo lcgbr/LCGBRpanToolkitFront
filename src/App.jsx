@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { SPACES_OBJECT } from './utils/spaces';
 import { fetchSpaceContent } from '../src/utils/api';
-import { categorizeActivities } from './utils/categorizeActivities';
+import { unifySpaceData } from './utils/categorizeActivities';
 import Header from './components/Header';
 import Main from './components/Main';
 import GlobalStyles from './styles/GlobalStyles';
+import ExportCsvButton from './components/FlyingActionButtons/ExportCsvButton';
+// import ToggleLayoutButton from './components/FlyingActionButtons/ToggleLayoutButton';
+
 
 function App() {
   const mBox = sessionStorage.getItem('mBox') || SPACES_OBJECT.dashResumo1.mBox;
-
   const [selectedSpace, setSelectedSpace] = useState(mBox);
   const [errorMessage, setErrorMessage] = useState('');
-  const [spaceData, setSpaceData] = useState([]);
+  const [currentDisplayedSpace, setCurrentDisplayedSpace] = useState([]);
+  const [spaceData, setSpaceData] = useState([[],[]]);
   const [isLoading, setIsLoading] = useState(false);
 
   const getSpaceContent = async () => {
@@ -24,11 +28,13 @@ function App() {
 
     if (response.status) {
       setErrorMessage(response.message);
-      setSpaceData([]);
+      setCurrentDisplayedSpace([]);
+      setSpaceData([[],[]]);
     } else {
       setErrorMessage('');
-      setSpaceData(categorizeActivities(response));
-      // setSpaceData(response);
+      const unifiedSpaceData = unifySpaceData(response);
+      setCurrentDisplayedSpace(unifiedSpaceData);
+      setSpaceData([response, unifiedSpaceData]);
     }
     setIsLoading(false);
     // window.dataLayer = window.dataLayer || [];
@@ -57,8 +63,11 @@ function App() {
       <Main
         errorMessage={errorMessage}
         isLoading={isLoading}
-        spaceData={spaceData}
+        spaceData={currentDisplayedSpace}
       />
+      <ExportCsvButton content={spaceData[0] || []} isDisabled={isLoading} mBox={mBox || 'mBox'} />
+      {/* <ToggleLayoutButton isDisabled={isLoading} setCurrentDisplayedSpace={setCurrentDisplayedSpace} spaceData={spaceData}/> */}
+      <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );
 }
