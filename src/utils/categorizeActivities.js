@@ -14,7 +14,7 @@ export function sortByPriorityAndStartDate(array) {
   });
 }
 
-export function categorizeActivities(groupedActivities) {
+export function unifySpaceData(groupedActivities) {
   try {
     const hasPipe = groupedActivities[0].name.includes('|');
     const hasParentheses = (groupedActivities[0].name.includes('(') || groupedActivities[0].name.includes(')'));
