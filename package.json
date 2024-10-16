@@ -12,7 +12,9 @@
   "author": "Marcelo Marques",
   "dependencies": {
     "react": "^18.2.0",
+    "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "styled-components": "^6.1.1"
   },
   "devDependencies": {

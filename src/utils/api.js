@@ -10,7 +10,6 @@ export async function fetchSpaceContent(space) {
       headers: { 'Content-Type': 'application/json' },
     };
 
-
     const endpoint = `${url}/space/${space}`;
     const response = await fetch(endpoint, config);
     const data = await response.json();
