@@ -29,7 +29,7 @@ function App() {
     if (response.status) {
       setErrorMessage(response.message);
       setCurrentDisplayedSpace([]);
-      setSpaceData([]);
+      setSpaceData([[],[]]);
     } else {
       setErrorMessage('');
       const unifiedSpaceData = unifySpaceData(response);
@@ -65,7 +65,7 @@ function App() {
         isLoading={isLoading}
         spaceData={currentDisplayedSpace}
       />
-      <ExportCsvButton content={spaceData[0]} isDisabled={isLoading} mBox={mBox || 'mBox'} />
+      <ExportCsvButton content={spaceData[0] || []} isDisabled={isLoading} mBox={mBox || 'mBox'} />
       {/* <ToggleLayoutButton isDisabled={isLoading} setCurrentDisplayedSpace={setCurrentDisplayedSpace} spaceData={spaceData}/> */}
       <Toaster position="bottom-right" reverseOrder={false} />
     </>
