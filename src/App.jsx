@@ -7,7 +7,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import GlobalStyles from './styles/GlobalStyles';
 import ExportCsvButton from './components/FlyingActionButtons/ExportCsvButton';
-// import ToggleLayoutButton from './components/FlyingActionButtons/ToggleLayoutButton';
+import ToggleLayoutButton from './components/FlyingActionButtons/ToggleLayoutButton';
 
 
 function App() {
@@ -17,21 +17,39 @@ function App() {
   const [currentDisplayedSpace, setCurrentDisplayedSpace] = useState([]);
   const [spaceData, setSpaceData] = useState([[],[]]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUnifiedView, setIsUnifiedView] = useState(true); // True = Unificada, False = Modular
+
+  const sortApiResponse = (response) => {
+    response.sort((a, b) => {
+      // Primeiro critério: ordenar pelo campo 'scheduling' (string) em ordem alfabética
+      if (a.scheduling < b.scheduling) return -1;
+      if (a.scheduling > b.scheduling) return 1;
+    
+      // Segundo critério: ordenar pelo campo 'priority' (número) em ordem decrescente
+      if (a.priority > b.priority) return -1;
+      if (a.priority < b.priority) return 1;
+    
+      // Terceiro critério: ordenar pelo campo 'startsAt' (data/hora) em ordem crescente
+      const dateA = new Date(a.startsAt);
+      const dateB = new Date(b.startsAt);
+      return dateA - dateB;
+    });
+  };
 
   const getSpaceContent = async () => {
     setErrorMessage('');
     setIsLoading(true);
 
-    // const existingToken = localStorage.getItem('token');
     const selectedSpaceClean = selectedSpace.replace(/\s/g, '').toLowerCase();
     const response = await fetchSpaceContent(selectedSpaceClean);
-
+    
     if (response.status) {
       setErrorMessage(response.message);
       setCurrentDisplayedSpace([]);
       setSpaceData([[],[]]);
     } else {
       setErrorMessage('');
+      sortApiResponse(response);
       const unifiedSpaceData = unifySpaceData(response);
       setCurrentDisplayedSpace(unifiedSpaceData);
       setSpaceData([response, unifiedSpaceData]);
@@ -49,6 +67,7 @@ function App() {
 
   useEffect(() => {
     getSpaceContent();
+    setIsUnifiedView(true);
   }, [selectedSpace]);
 
   return (
@@ -66,7 +85,13 @@ function App() {
         spaceData={currentDisplayedSpace}
       />
       <ExportCsvButton content={spaceData[0] || []} isDisabled={isLoading} mBox={mBox || 'mBox'} />
-      {/* <ToggleLayoutButton isDisabled={isLoading} setCurrentDisplayedSpace={setCurrentDisplayedSpace} spaceData={spaceData}/> */}
+      <ToggleLayoutButton
+        isDisabled={isLoading}
+        setCurrentDisplayedSpace={setCurrentDisplayedSpace}
+        spaceData={spaceData}
+        isUnifiedView={isUnifiedView}
+        setIsUnifiedView={setIsUnifiedView}
+      />
       <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );

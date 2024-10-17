@@ -4,7 +4,7 @@ export const ButtonFAB = styled.button`
   cursor: pointer;
   position: fixed;
   bottom: 20px;
-  right: 72px;
+  right: 16px;
   width: 40px;
   height: 40px;
   background-color: #fff;
