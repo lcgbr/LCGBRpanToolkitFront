@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SPACES_ARRAY } from '../../utils/spaces';
 import logoLCG from '../../assets/lcgbr-white-logo.webp';
 import { HeaderContainer, HeaderTitle, HeaderButton } from './style';
 
 
 export default function Header(props) {
-  const { selectedSpace, setSelectedSpace } = props;
+  const { selectedSpace, setSelectedSpace, SPACES_ARRAY } = props;
 
   const handleSpace = (value) => {
     sessionStorage.setItem('mBox', value);
@@ -40,5 +39,4 @@ export default function Header(props) {
 Header.propTypes = {
   selectedSpace: PropTypes.string,
   setSelectedSpace: PropTypes.func,
-  getSpaceContent: PropTypes.func
 }.isRequired;

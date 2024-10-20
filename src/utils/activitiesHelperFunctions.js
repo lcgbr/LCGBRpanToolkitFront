@@ -1,6 +1,23 @@
 // ARQUIVO TEMPORÁRIO!!!
 // Essa implementação foi feita apenas para garantir que o toolkit continue funcionando durante a fase de migração da estrutura de atividades do target
 
+export function sortApiResponse(response) {
+  response.sort((a, b) => {
+    // Primeiro critério: ordenar pelo campo 'scheduling' (string) em ordem alfabética
+    if (a.scheduling < b.scheduling) return -1;
+    if (a.scheduling > b.scheduling) return 1;
+  
+    // Segundo critério: ordenar pelo campo 'priority' (número) em ordem decrescente
+    if (a.priority > b.priority) return -1;
+    if (a.priority < b.priority) return 1;
+  
+    // Terceiro critério: ordenar pelo campo 'startsAt' (data/hora) em ordem crescente
+    const dateA = new Date(a.startsAt);
+    const dateB = new Date(b.startsAt);
+    return dateA - dateB;
+  });
+}
+
 export function sortByPriorityAndStartDate(array) {
   return array.sort((a, b) => {
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { SPACES_OBJECT } from './utils/spaces';
+import { SPACES_OBJECT, SPACES_ARRAY } from './utils/spaces';
 import { fetchSpaceContent } from '../src/utils/api';
-import { unifySpaceData } from './utils/categorizeActivities';
+import { sortApiResponse, unifySpaceData } from './utils/activitiesHelperFunctions';
 import Header from './components/Header';
 import Main from './components/Main';
 import GlobalStyles from './styles/GlobalStyles';
@@ -10,7 +10,7 @@ import ExportCsvButton from './components/FlyingActionButtons/ExportCsvButton';
 import ToggleLayoutButton from './components/FlyingActionButtons/ToggleLayoutButton';
 
 
-function App() {
+export default function App() {
   const mBox = sessionStorage.getItem('mBox') || SPACES_OBJECT.dashResumo1.mBox;
   const [selectedSpace, setSelectedSpace] = useState(mBox);
   const [errorMessage, setErrorMessage] = useState('');
@@ -18,23 +18,6 @@ function App() {
   const [spaceData, setSpaceData] = useState([[],[]]);
   const [isLoading, setIsLoading] = useState(false);
   const [isUnifiedView, setIsUnifiedView] = useState(true); // True = Unificada, False = Modular
-
-  const sortApiResponse = (response) => {
-    response.sort((a, b) => {
-      // Primeiro critério: ordenar pelo campo 'scheduling' (string) em ordem alfabética
-      if (a.scheduling < b.scheduling) return -1;
-      if (a.scheduling > b.scheduling) return 1;
-    
-      // Segundo critério: ordenar pelo campo 'priority' (número) em ordem decrescente
-      if (a.priority > b.priority) return -1;
-      if (a.priority < b.priority) return 1;
-    
-      // Terceiro critério: ordenar pelo campo 'startsAt' (data/hora) em ordem crescente
-      const dateA = new Date(a.startsAt);
-      const dateB = new Date(b.startsAt);
-      return dateA - dateB;
-    });
-  };
 
   const getSpaceContent = async () => {
     setErrorMessage('');
@@ -76,8 +59,7 @@ function App() {
       <Header
         selectedSpace={selectedSpace}
         setSelectedSpace={setSelectedSpace}
-        getSpaceContent={getSpaceContent}
-        errorMessage={errorMessage}
+        SPACES_ARRAY={SPACES_ARRAY}
       />
       <Main
         errorMessage={errorMessage}
@@ -96,5 +78,3 @@ function App() {
     </>
   );
 }
-
-export default App;

@@ -29,6 +29,7 @@ export default function Card(props) {
       SPACES_OBJECT.homeResumo1.mBox.toLowerCase(),
       SPACES_OBJECT.homeResumo2.mBox.toLowerCase(),
       SPACES_OBJECT.homeResumo3.mBox.toLowerCase(),
+      'espacocomercial1'
     ].some((space) => lowerCaseName.includes(space));
     
     const isCardToast = [
