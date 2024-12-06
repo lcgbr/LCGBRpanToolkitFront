@@ -31,7 +31,7 @@ export const apiMockLima = [
                 'acao': 'https://www.limaconsulting.com/pt-br/',
                 'nomeOferta': 'PT-01-CCO-ES1-APP-CAMPANHA-X-LIMA',
                 'mBox': 'espacoComercial1',
-                'imagemURL': 'https://picsum.photos/530/200?grayscale'
+                'imagemURL': '/mockLimaBanners/20_anos_servir_visionarios.webp'
               }
             }
           }
@@ -74,7 +74,7 @@ export const apiMockLima = [
                 'nomeOferta': 'PT-04-SHP-ES1-APP-CAMPANHA-Y-LIMA',
                 'ordemExibicaoLogin': '1',
                 'mBox': 'espacoComercial1',
-                'imagemURL': 'https://picsum.photos/265/100?grayscale'
+                'imagemURL': '/mockLimaBanners/historia_de_sucesso_tyson_foods.webp'
               }
             }
           }
@@ -117,7 +117,7 @@ export const apiMockLima = [
                 'acao': 'https://www.limaconsulting.com/pt-br/',
                 'nomeOferta': 'PT-01-CCO-EC1-APP-LIMA-QA',
                 'mBox': 'espacoComercial1',
-                'imagemURL': 'https://random.imagecdn.app/530/200'
+                'imagemURL': '/mockLimaBanners/vem_pra_lima.webp'
               }
             }
           }
