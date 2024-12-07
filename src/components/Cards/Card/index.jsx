@@ -29,12 +29,13 @@ export default function Card(props) {
       SPACES_OBJECT.homeResumo1.mBox.toLowerCase(),
       SPACES_OBJECT.homeResumo2.mBox.toLowerCase(),
       SPACES_OBJECT.homeResumo3.mBox.toLowerCase(),
-      'espacocomercial1'
+      'Espaço Comercial 1'.toLowerCase() // Configuração para tela de mock
     ].some((space) => lowerCaseName.includes(space));
     
     const isCardToast = [
       SPACES_OBJECT.modalHomeCartaoProd.mBox.toLowerCase(),
       SPACES_OBJECT.modalHomeContaProd.mBox.toLowerCase(),
+      'Espaço Comercial 2'.toLowerCase() // Configuração para tela de mock
     ].some((space) => lowerCaseName.includes(space));
     
     if(isCardResumo) {

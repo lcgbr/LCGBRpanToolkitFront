@@ -5,6 +5,7 @@ export const ButtonFAB = styled.button`
   position: fixed;
   bottom: 20px;
   right: 72px;
+  right: 16px; // deletar quando liberar o toggle
   width: 40px;
   height: 40px;
   background-color: #fff;

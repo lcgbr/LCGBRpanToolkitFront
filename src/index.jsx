@@ -9,6 +9,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/mock" element={<Mock />} />
+      <Route path="/mock/static" element={<Mock />} />
       <Route path="*" element={<App />} />
     </Routes>
   </BrowserRouter>

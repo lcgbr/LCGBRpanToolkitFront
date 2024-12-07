@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import { apiMockLima } from '../../utils/apiMockLima';
-import { sortApiResponse, unifySpaceData } from '../../utils/activitiesHelperFunctions';
+import { useLocation } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Header from '../../components/Header';
 import Main from '../../components/Main';
-import GlobalStyles from '../../styles/GlobalStyles';
 import ExportCsvButton from '../../components/FlyingActionButtons/ExportCsvButton';
 import ToggleLayoutButton from '../../components/FlyingActionButtons/ToggleLayoutButton';
+import { apiMockLima } from '../../utils/apiMockLima';
+import { sortApiResponse, unifySpaceData } from '../../utils/activitiesHelperFunctions';
+import { shuffleMockData } from '../../utils/shuffleMockData';
+import GlobalStyles from '../../styles/GlobalStyles';
 
+const SPACES_ARRAY = [
+  { displayName: 'Espaço Comercial 1', mBox: 'Espaço Comercial 1' },
+  { displayName: 'Espaço Comercial 2', mBox: 'Espaço Comercial 2' }
+];
 
 export default function Mock() {
-  const SPACES_ARRAY = [
-    { displayName: 'Espaço Comercial 1', mBox: 'espacoComercial1' },
-    { displayName: 'Espaço Comercial 2', mBox: 'espacoComercial2' }
-  ];
-
   const mBox = sessionStorage.getItem('mBox') || SPACES_ARRAY[0].mBox;
   const [selectedSpace, setSelectedSpace] = useState(mBox);
   const [errorMessage, setErrorMessage] = useState('');
@@ -23,12 +24,26 @@ export default function Mock() {
   const [isLoading, setIsLoading] = useState(false);
   const [isUnifiedView, setIsUnifiedView] = useState(true); // True = Unificada, False = Modular
 
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const getSpaceContent = async () => {
     setErrorMessage('');
     setIsLoading(true);
 
-    const response = selectedSpace === 'espacoComercial1' ? apiMockLima[0] : apiMockLima[1];
-    
+    const data = apiMockLima.map((act) => ({
+      ...act,
+      name: `${selectedSpace} | ${act.name}`,
+    }));
+
+    let response;
+
+    if (currentPath === '/mock/static') {
+      response = data;
+    } else {
+      response = shuffleMockData(data);
+    }
+
     if (response.status) {
       setErrorMessage(response.message);
       setCurrentDisplayedSpace([]);
@@ -47,10 +62,9 @@ export default function Mock() {
   };
 
   useEffect(() => {
-    toast.error('Página em construção');
     getSpaceContent();
     setIsUnifiedView(true);
-    // Função de limpeza ao desmontar
+    // // Função de limpeza ao desmontar, importante ao sair da página de mock
     return () => {
       sessionStorage.clear();
     };
@@ -64,11 +78,13 @@ export default function Mock() {
         setSelectedSpace={setSelectedSpace}
         SPACES_ARRAY={SPACES_ARRAY}
       />
+      
       <Main
         errorMessage={errorMessage}
         isLoading={isLoading}
         spaceData={currentDisplayedSpace}
       />
+
       <ExportCsvButton content={spaceData[0] || []} isDisabled={isLoading} mBox={mBox} />
       <ToggleLayoutButton
         isDisabled={isLoading}
