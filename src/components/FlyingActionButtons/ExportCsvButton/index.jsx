@@ -29,6 +29,14 @@ export default function ExportCsvButton(props) {
     setTimeout(() => {
       toast.success('Arquivo CSV gerado com sucesso!');
     }, 500);
+    // window.dataLayer = window.dataLayer || [];
+    // window.dataLayer.push({
+    //   'event': 'export_csv_click',
+    //   'pageInfo': {
+    //     'space': mBox,
+    //     'activities': content.length
+    //   }
+    // });
   };
 
   if(csvData.length === 0) {

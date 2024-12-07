@@ -23,7 +23,7 @@ export default function Main(props) {
         (<ActivityGroup>
           {spaceData.map((activity, index) => (
             <ActivityContainer key={index}>
-              <ActivityTitle payload={{name: activity.name, quantity: activity.options.length}} />
+              <ActivityTitle payload={{name: activity.name, quantity: activity.options.length, scheduling: activity.scheduling}} />
 
               {activity.options.map((offer, idx) => 
                 <ActivityContent key={idx}>

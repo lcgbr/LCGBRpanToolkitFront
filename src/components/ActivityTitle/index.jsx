@@ -1,46 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { SPACES_OBJECT } from '../../utils/spaces';
 import { Container } from './style';
 
 
 export default function ActivityTitle(props) {
-  const { name, quantity } = props.payload;
+  const { name, quantity, scheduling } = props.payload;
 
-  const splitTitleString = (titleString) => {
-    const titleSections = {
-      mainTitle: titleString,
-      audienceSection: null,
-      dateSection: null,
-      numberOfOffers: `${quantity} ${quantity === 1 ? 'Oferta' : 'Ofertas'}`
-    };
+  const isUnifiedView = name.includes('Experiências ativas |') || name.includes('Experiências agendadas | ');
+  const numberOfOffers = `${quantity} ${quantity === 1 ? 'Oferta' : 'Ofertas'}`;
+  const [mainTitle, ...rest] = name.split(' | ');
+  const mBox = SPACES_OBJECT.travaTelas.mBox.toLowerCase();
+  const scheduleStatus = scheduling === 'live' ? 'ativas' : 'agendadas';
+  let containerWidth = name.toLowerCase().includes(mBox) ? '251px' : '265px';
 
-    const regex = /\(.*\)/; // Regex para pegar o conteúdo entre parênteses
-    const match = titleString.match(regex);
-
-    if (match) {
-      titleSections.mainTitle = titleString.replace(match[0], '').trim();
-      titleSections.dateSection = match[0].replace(/[()]/g, '').trim();
-
-    } else if (titleString.includes('|')) {
-      const [mainTitle, audienceSection, dateSection = null] = titleString.split(' | ');
-      titleSections.mainTitle = mainTitle;
-      titleSections.audienceSection = audienceSection;
-      titleSections.dateSection = dateSection;
-    } 
-
-    return titleSections;
-  };
-
-  const { mainTitle, audienceSection, dateSection, numberOfOffers } = splitTitleString(name);
-
-  return (
-    <Container>
-      <h2>{mainTitle}</h2>
-      <p>{dateSection}</p>
-      <p>{audienceSection}</p>
-      <strong>{numberOfOffers}</strong>
-    </Container>
-  );
+  if(isUnifiedView) {
+    return (
+      <Container>
+        <h2>{mainTitle.trim()}</h2>
+        <p id="unified">{rest.join(' ').trim()}</p>
+        <strong>{numberOfOffers}</strong>
+      </Container>
+    );
+  } else {
+    return (
+      <Container style={{ width: containerWidth, alignSelf: 'flex-end' }}>
+        <h2>{`Experiências ${scheduleStatus}`}</h2>
+        <p
+          id="modular"
+          title={name.trim()}
+          style={{ minHeight: '26px' }}
+        >
+          {rest.join(' ').trim()}
+        </p>
+        <strong>{numberOfOffers}</strong>
+      </Container>
+    );
+  }
 }
 
 ActivityTitle.propTypes = {

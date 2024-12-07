@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import toast from 'react-hot-toast';
 import { ButtonFAB } from './style';
 import icons from '../../../assets';
 
 export default function ToggleLayoutButton(props) {
-  const { isDisabled, setCurrentDisplayedSpace, spaceData } = props;
+  const { isDisabled, setCurrentDisplayedSpace, spaceData, isUnifiedView, setIsUnifiedView } = props;
 
-  // Estado para controlar o ícone e o título
-  const [isUnifiedView, setIsUnifiedView] = useState(true); // False = Modular, True = Unificada
-
-  // Função para alternar o estado
   const handleToggleView = () => {
+    if(spaceData[0].length === 0) {
+      toast.error('Não há dados para visualizar!');
+      return;
+    }
     setIsUnifiedView(!isUnifiedView);
-    // toast.success('Layout alterado com sucesso!');
   };
 
   useEffect(() => {
@@ -39,5 +39,6 @@ ToggleLayoutButton.propTypes = {
   isDisabled: PropTypes.bool,
   setCurrentDisplayedSpace: PropTypes.func,
   spaceData: PropTypes.array,
-
+  isUnifiedView: PropTypes.bool,
+  setIsUnifiedView: PropTypes.func,
 };

@@ -17,33 +17,34 @@ export default function Card(props) {
 
   const offerName = payload.nomeOferta || payload.name;
   const ordinationTextInfo = `Posição: ${ordination.position}\nPrioridade: ${ordination.priority}`;
+  const lowerCaseName = activity.name.toLowerCase();
 
-  let cardContainerWidth = activity.name.includes(SPACES_OBJECT.travaTelas.mBox) ? '216px' : '262px';
+  let cardContainerWidth = lowerCaseName.includes(SPACES_OBJECT.travaTelas.mBox.toLowerCase()) ? '216px' : '262px';
 
   const setSpaceTemplate = () => {
-    const { name } = activity;
-
     const isCardResumo = [
-      SPACES_OBJECT.dashResumo1.mBox,
-      SPACES_OBJECT.dashResumo2.mBox,
-      SPACES_OBJECT.dashResumo3.mBox,
-      SPACES_OBJECT.homeResumo1.mBox,
-      SPACES_OBJECT.homeResumo2.mBox,
-      SPACES_OBJECT.homeResumo3.mBox,
-    ].some((space) => name.includes(space));
+      SPACES_OBJECT.dashResumo1.mBox.toLowerCase(),
+      SPACES_OBJECT.dashResumo2.mBox.toLowerCase(),
+      SPACES_OBJECT.dashResumo3.mBox.toLowerCase(),
+      SPACES_OBJECT.homeResumo1.mBox.toLowerCase(),
+      SPACES_OBJECT.homeResumo2.mBox.toLowerCase(),
+      SPACES_OBJECT.homeResumo3.mBox.toLowerCase(),
+      'Espaço Comercial 1'.toLowerCase() // Configuração para tela de mock
+    ].some((space) => lowerCaseName.includes(space));
     
     const isCardToast = [
-      SPACES_OBJECT.modalHomeCartaoProd.mBox,
-      SPACES_OBJECT.modalHomeContaProd.mBox,
-    ].some((space) => name.includes(space));
+      SPACES_OBJECT.modalHomeCartaoProd.mBox.toLowerCase(),
+      SPACES_OBJECT.modalHomeContaProd.mBox.toLowerCase(),
+      'Espaço Comercial 2'.toLowerCase() // Configuração para tela de mock
+    ].some((space) => lowerCaseName.includes(space));
     
     if(isCardResumo) {
       return (<CardResumo payload={offer} />);
 
-      // } else if(name.includes(SPACES_OBJECT.telaCentralAvisos.mBox)) {
+      // } else if(lowerCaseName.includes(SPACES_OBJECT.telaCentralAvisos.mBox)) {
       //   return (<CardCentralAvisos payload={offer} />);
 
-    } else if(name.includes(SPACES_OBJECT.travaTelas.mBox)) {
+    } else if(lowerCaseName.includes(SPACES_OBJECT.travaTelas.mBox.toLowerCase())) {
       return (<CardTravaTelas payload={offer} />);
 
     } else if(isCardToast) {

@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { SPACES_OBJECT, SPACES_ARRAY } from './utils/spaces';
-import { fetchSpaceContent } from '../src/utils/api';
-import { sortApiResponse, unifySpaceData } from './utils/activitiesHelperFunctions';
-import Header from './components/Header';
-import Main from './components/Main';
-import GlobalStyles from './styles/GlobalStyles';
-import ExportCsvButton from './components/FlyingActionButtons/ExportCsvButton';
-import ToggleLayoutButton from './components/FlyingActionButtons/ToggleLayoutButton';
+import Header from '../../components/Header';
+import Main from '../../components/Main';
+import ExportCsvButton from '../../components/FlyingActionButtons/ExportCsvButton';
+import ToggleLayoutButton from '../../components/FlyingActionButtons/ToggleLayoutButton';
+import { apiMockLima } from '../../utils/apiMockLima';
+import { sortApiResponse, unifySpaceData } from '../../utils/activitiesHelperFunctions';
+import { shuffleMockData } from '../../utils/shuffleMockData';
+import GlobalStyles from '../../styles/GlobalStyles';
 
+const SPACES_ARRAY = [
+  { displayName: 'Espaço Comercial 1', mBox: 'Espaço Comercial 1' },
+  { displayName: 'Espaço Comercial 2', mBox: 'Espaço Comercial 2' }
+];
 
-export default function App() {
-  const mBox = sessionStorage.getItem('mBox') || SPACES_OBJECT.dashResumo1.mBox;
+export default function Mock() {
+  const mBox = sessionStorage.getItem('mBox') || SPACES_ARRAY[0].mBox;
   const [selectedSpace, setSelectedSpace] = useState(mBox);
   const [errorMessage, setErrorMessage] = useState('');
   const [currentDisplayedSpace, setCurrentDisplayedSpace] = useState([]);
@@ -19,13 +24,26 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isUnifiedView, setIsUnifiedView] = useState(true); // True = Unificada, False = Modular
 
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const getSpaceContent = async () => {
     setErrorMessage('');
     setIsLoading(true);
 
-    const selectedSpaceClean = selectedSpace.replace(/\s/g, '').toLowerCase();
-    const response = await fetchSpaceContent(selectedSpaceClean);
-    
+    const data = apiMockLima.map((act) => ({
+      ...act,
+      name: `${selectedSpace} | ${act.name}`,
+    }));
+
+    let response;
+
+    if (currentPath === '/mock/static') {
+      response = data;
+    } else {
+      response = shuffleMockData(data);
+    }
+
     if (response.status) {
       setErrorMessage(response.message);
       setCurrentDisplayedSpace([]);
@@ -37,20 +55,19 @@ export default function App() {
       setCurrentDisplayedSpace(unifiedSpaceData);
       setSpaceData([response, unifiedSpaceData]);
     }
-    setIsLoading(false);
-    // window.dataLayer = window.dataLayer || [];
-    // window.dataLayer.push({
-    //   'event': 'space_view',
-    //   'pageInfo': {
-    //     'space': selectedSpaceClean,
-    //     'activities': response.length
-    //   }
-    // });
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 400);
+    
   };
 
   useEffect(() => {
     getSpaceContent();
     setIsUnifiedView(true);
+    // // Função de limpeza ao desmontar, importante ao sair da página de mock
+    return () => {
+      sessionStorage.clear();
+    };
   }, [selectedSpace]);
 
   return (
@@ -61,12 +78,14 @@ export default function App() {
         setSelectedSpace={setSelectedSpace}
         SPACES_ARRAY={SPACES_ARRAY}
       />
+      
       <Main
         errorMessage={errorMessage}
         isLoading={isLoading}
         spaceData={currentDisplayedSpace}
       />
-      <ExportCsvButton content={spaceData[0] || []} isDisabled={isLoading} mBox={mBox || 'mBox'} />
+
+      <ExportCsvButton content={spaceData[0] || []} isDisabled={isLoading} mBox={mBox} />
       <ToggleLayoutButton
         isDisabled={isLoading}
         setCurrentDisplayedSpace={setCurrentDisplayedSpace}
