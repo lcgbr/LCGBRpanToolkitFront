@@ -18,7 +18,6 @@ export const ButtonFAB = styled.button`
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
   z-index: 997; /* Garante que o botão fique sobre outros elementos */
   display: flex;
-  display: none; // remover para voltar a exibir - também é necessário ajustar o right do csv para 72px
   align-items: center;
   justify-content: center;
 
