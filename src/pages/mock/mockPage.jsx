@@ -11,8 +11,8 @@ import { shuffleMockData } from '../../utils/shuffleMockData';
 import GlobalStyles from '../../styles/GlobalStyles';
 
 const SPACES_ARRAY = [
-  { displayName: 'Espaço Comercial 1', mBox: 'Espaço Comercial 1' },
-  { displayName: 'Espaço Comercial 2', mBox: 'Espaço Comercial 2' }
+  { displayName: 'mBox 1', mBox: 'mBox1' },
+  { displayName: 'mBox 2', mBox: 'mBox2' }
 ];
 
 export default function Mock() {
