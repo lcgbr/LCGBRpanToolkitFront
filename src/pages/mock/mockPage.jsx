@@ -16,7 +16,7 @@ const SPACES_ARRAY = [
 ];
 
 export default function Mock() {
-  const mBox = sessionStorage.getItem('mBox') || SPACES_ARRAY[0].mBox;
+  const mBox = SPACES_ARRAY[0].mBox;
   const [selectedSpace, setSelectedSpace] = useState(mBox);
   const [errorMessage, setErrorMessage] = useState('');
   const [currentDisplayedSpace, setCurrentDisplayedSpace] = useState([]);
