@@ -29,7 +29,7 @@ export default function Card(props) {
       SPACES_OBJECT.homeResumo1.mBox.toLowerCase(),
       SPACES_OBJECT.homeResumo2.mBox.toLowerCase(),
       SPACES_OBJECT.homeResumo3.mBox.toLowerCase(),
-      'mBox'.toLowerCase() // Configuração para tela de mock
+      'mBox1'.toLowerCase() // Configuração para tela de mock
     ].some((space) => lowerCaseName.includes(space));
     
     const isCardToast = [
